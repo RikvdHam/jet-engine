@@ -27,7 +27,7 @@ dynamic = ["dependencies", "version"]
 "Source" = "https://gitlab.com/..."
 
 [project.scripts]
-sample = "src:main"
+sample = "jet_engine.main:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

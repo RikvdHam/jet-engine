@@ -9,12 +9,12 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-from jet_engine.api.router import api_router
-from jet_engine.core.config import settings
-from jet_engine.middleware.security_headers import SecurityHeadersMiddleware
-from jet_engine.middleware.trusted_host import add_trusted_hosts
-from jet_engine.db.base import Base
-from jet_engine.db.session import engine
+from jet_engine.app.api.router import api_router
+from jet_engine.infra.core.config import settings
+from jet_engine.infra.middleware.security_headers import SecurityHeadersMiddleware
+from jet_engine.infra.middleware.trusted_host import add_trusted_hosts
+from jet_engine.infra.db.base import Base
+from jet_engine.infra.db.session import engine
 
 app = FastAPI(
     title="JET Engine",

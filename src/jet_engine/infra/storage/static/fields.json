@@ -1,0 +1,50 @@
+[
+    {
+        "id": "12b5a5e0-d8d3-405c-aa66-75fb0a2928cb",
+        "canonical_name": "journal_id",
+        "display_name": "Journal ID",
+        "description": "Description about Journal ID",
+        "dtype": "str",
+        "roles": ["dimension", "filter", "measure"],
+        "aggregations": ["count", "count_distinct"],
+        "filter_operators": ["=", "in", "!=", "not in"],
+        "is_required": true,
+        "group": null
+    },
+    {
+        "id": "76a53a2b-b656-4c1f-a6e3-a930da63a308",
+        "canonical_name": "debit_credit_flag",
+        "display_name": "Credit/Debit Flag",
+        "description": "Description about Debit/Credit Flag",
+        "dtype": "str",
+        "roles": ["dimension", "filter", "measure"],
+        "aggregations": ["count", "count_distinct"],
+        "filter_operators": ["=", "in", "!=", "not in"],
+        "is_required": true,
+        "group": null
+    },
+    {
+        "id": "97acfd5e-1c61-481a-a97a-eefd5973789e",
+        "canonical_name": "amount",
+        "display_name": "Amount",
+        "description": "Description about Amount",
+        "dtype": "float",
+        "roles": ["dimension", "filter", "measure"],
+        "aggregations": ["count", "count_distinct", "avg", "max", "min","sum"],
+        "filter_operators": ["=", "in", "!=", "not in", ">", ">=", "is not null", "is null", "<", "<="],
+        "is_required": true,
+        "group": null
+    },
+    {
+        "id": "2e1c827a-36c6-4873-b62f-d0634db18ede",
+        "canonical_name": "abs_amount",
+        "display_name": "Amount Absolut",
+        "description": "Description about Amount Absolut",
+        "dtype": "float",
+        "roles": ["dimension", "filter", "measure"],
+        "aggregations": ["count", "count_distinct", "avg", "max", "min","sum"],
+        "filter_operators": ["=", "in", "!=", "not in", ">", ">=", "is not null", "is null", "<", "<="],
+        "is_required": true,
+        "group": null
+    }
+]
