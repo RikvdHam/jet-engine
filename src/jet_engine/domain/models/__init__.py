@@ -1,6 +1,6 @@
 from .dimension import Dimension
 from .field import Field
-from .filter_tree import FilterGroup
+from .filter_tree import FilterGroup, FilterCondition, FilterNode
 from .measure import (Measure, MeasureSpec)
 from .pagination import Pagination
 from .sorting import Sorting
@@ -14,5 +14,7 @@ __all__ = [
     "Pagination",
     "Sorting",
     "MeasureSpec",
-    "View"
+    "View",
+    "FilterNode",
+    "FilterCondition"
 ]

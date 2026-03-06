@@ -19,6 +19,7 @@ from jet_engine.app.services.dataset_transforming_service import transform_datas
 from jet_engine.domain.request_models import ViewRequest
 from jet_engine.domain.models import View
 from jet_engine.domain.models import Field
+from jet_engine.infra.core import QueryBuilder
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -93,5 +94,7 @@ async def query(
         user_id: int = Depends(get_current_user_id)
 ):
     view = View.from_request(request, dataset_id, user_id)
+
+    print(QueryBuilder.build(view))
     
     return view #TODO: TEST!

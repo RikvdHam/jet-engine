@@ -2,57 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/enums/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/enums/aggregation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/enums/axis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/enums/field_role.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/enums/filter_operator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/middleware/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/static/view.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/query_builder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/jet_engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jet_engine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.in" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/api/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/api/routes/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/api/routes/meta.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/meta.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/api/routes/uploads.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/db/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/db/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/db/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/session.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/middleware/security_headers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/middleware/security_headers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/middleware/trusted_host.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/middleware/trusted_host.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/models/enums.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/models/field.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/services/dataset_query_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/services/dataset_transforming_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/services/dataset_validation_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_validation_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/storage/raw/1b0c6eac-9590-4a0b-b98c-72ff7d5dcbb0.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/raw/1b0c6eac-9590-4a0b-b98c-72ff7d5dcbb0.parquet" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/storage/raw/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/raw/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/storage/validated/1b0c6eac-9590-4a0b-b98c-72ff7d5dcbb0.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/validated/1b0c6eac-9590-4a0b-b98c-72ff7d5dcbb0.parquet" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/storage/validated/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/validated/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/storage/views/e3fbccbf-9645-4d24-bef4-bf05020865af.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/views/e3fbccbf-9645-4d24-bef4-bf05020865af.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,7 +35,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
