@@ -5,6 +5,7 @@ from .measure import (Measure, MeasureSpec)
 from .pagination import Pagination
 from .sorting import Sorting
 from .view import View
+from .query import Query
 
 __all__ = [
     "Dimension",
@@ -16,5 +17,6 @@ __all__ = [
     "MeasureSpec",
     "View",
     "FilterNode",
-    "FilterCondition"
+    "FilterCondition",
+    "Query"
 ]

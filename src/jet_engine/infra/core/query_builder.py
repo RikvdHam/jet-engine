@@ -1,37 +1,50 @@
+import os
+from pathlib import Path
 from typing import List, Dict, Tuple
 
+from jet_engine.infra.core.config import settings
 from jet_engine.infra.core import field_registry
 from jet_engine.domain.enums import FieldRole, FilterOperator
-from jet_engine.domain.models import Dimension, Measure, View, FilterNode, FilterCondition, FilterGroup
+from jet_engine.domain.models import Dimension, Measure, View, FilterNode, FilterCondition, FilterGroup, Query
 
 
 class QueryBuilder:
 
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    VIEW_STORAGE_FOLDER = os.path.join(BASE_DIR, settings.storage_views_dir)
+
     @staticmethod
-    def build(view: View) -> Tuple[str, List]:
+    def build(view: View) -> Query:
         dimensions = QueryBuilder._compile_dimensions(view.dimensions)
         measures = QueryBuilder._compile_measures(view.measures)
         filter_sql, params = QueryBuilder._compile_filters(view.filters)
 
-        return (
-                   f"{QueryBuilder._compile_select_clause(view.dataset_id, dimensions, measures)}"
-                   f"{QueryBuilder._compile_where_clause(filter_sql)}"
-                   f"{QueryBuilder._compile_group_by_class(dimensions)}"
-               ), params
+        sql = (
+            f"{QueryBuilder._compile_select_clause(view.dataset_id, dimensions, measures)}"
+            f"{QueryBuilder._compile_where_clause(filter_sql)}"
+            f"{QueryBuilder._compile_group_by_class(dimensions)}")
+
+        if view.pagination:
+            sql += " LIMIT ? OFFSET ?"
+            params = params + [view.pagination.limit, view.pagination.offset]
+
+        return Query(sql=sql, params=params)
 
     @staticmethod
     def _compile_select_clause(dataset_id: str, dimensions: List[str],
                                measures: List[str]) -> str:
+        file_path = os.path.join(QueryBuilder.VIEW_STORAGE_FOLDER, f'{dataset_id}.parquet')
+
         select_parts = dimensions + measures
         if not select_parts:
             return (
                 f"SELECT *\n"
-                f"FROM read_parquet('{dataset_id}.parquet')\n"
+                f"FROM read_parquet('{file_path}')\n"
             )
 
         return (
             f"SELECT {', '.join(select_parts)}\n"
-            f"FROM read_parquet('{dataset_id}.parquet')\n"
+            f"FROM read_parquet('{file_path}')\n"
         )
 
     @staticmethod

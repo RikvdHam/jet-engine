@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 from jet_engine.infra.core.config import settings
 from jet_engine.infra.db.models import Dataset, DatasetMapping, SignatureMapping
 from jet_engine.infra.db.session import get_db, get_current_user_id
-from jet_engine.app.services.dataset_query_service import get_raw_dataset_page
+from jet_engine.app.services.dataset_query_service import get_raw_dataset_page, execute_query
 from jet_engine.app.services.dataset_validation_service import validate_dataset
 from jet_engine.app.services.dataset_transforming_service import transform_dataset
 from jet_engine.domain.request_models import ViewRequest
@@ -91,10 +91,7 @@ async def transform( #TODO: AFTER TRANSFORM: GET LAST VIEW, SO MAKE VIEW OF TRAN
 async def query(
         dataset_id: str,
         request: ViewRequest,
+        db: Session = Depends(get_db),
         user_id: int = Depends(get_current_user_id)
 ):
-    view = View.from_request(request, dataset_id, user_id)
-
-    print(QueryBuilder.build(view))
-    
-    return view #TODO: TEST!
+    return execute_query(db, request, dataset_id, user_id)

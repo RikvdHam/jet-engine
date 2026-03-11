@@ -1,13 +1,19 @@
+import os
 import uuid
+import duckdb
 from pathlib import Path
 from typing import Dict, Optional
 
 import duckdb
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
+from fastapi.responses import StreamingResponse
 
 from jet_engine.infra.db.models import Dataset, ViewORM
+from jet_engine.infra.core import QueryBuilder
 from jet_engine.infra.core.config import settings
+from jet_engine.domain.models import View
+from jet_engine.domain.request_models import ViewRequest
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +51,36 @@ def get_raw_dataset_page(
         "has_next": offset + limit < dataset.row_count
     }
 
+
+def execute_query(db: Session, request: ViewRequest, dataset_id: str, user_id: int):
+    # --- 1. Create semantic model
+    view = View.from_request(request, dataset_id, user_id)
+
+    # --- 2. Create query
+    compiled_query = QueryBuilder.build(view)
+
+    # --- 3. Execute query
+    conn = duckdb.connect()
+    result = conn.execute(compiled_query.sql, compiled_query.params)
+    arrow_table = result.arrow()
+
+    # --- 4. Save view in DB
+
+    # --- 5. Response serialization
+    return _arrow_response(arrow_table)
+
+
+def _arrow_response(table):
+
+    sink = io.BytesIO()
+
+    with ipc.new_stream(sink, table.schema) as writer:
+        writer.write_table(table)
+
+    return Response(
+        content=sink.getvalue(),
+        media_type="application/vnd.apache.arrow.stream"
+    )
 
 #TODO: Create this again
 
