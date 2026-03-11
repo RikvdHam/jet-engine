@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/query.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/views/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/health.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_health.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/domain/models/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/pagination.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/core/query_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/query_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.dev.in" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.dev.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tox.ini" beforeDir="false" afterPath="$PROJECT_DIR$/tox.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

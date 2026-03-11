@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+from contextlib import asynccontextmanager
 
 from jet_engine.app.api.router import api_router
 from jet_engine.infra.core.config import settings
@@ -16,9 +17,24 @@ from jet_engine.infra.middleware.trusted_host import add_trusted_hosts
 from jet_engine.infra.db.base import Base
 from jet_engine.infra.db.session import engine
 
+
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+
+    Base.metadata.create_all(bind=engine)
+
+    application.state.cache = {}
+    print("Cache initialized")
+
+    yield
+
+    print("App shutting down")
+
+
 app = FastAPI(
     title="JET Engine",
     docs_url=None if settings.is_production else "/docs",
+    lifespan=lifespan
 )
 
 app.include_router(api_router)
@@ -47,8 +63,3 @@ app.add_exception_handler(
         content={"detail": "Rate limit exceeded"}
     )
 )
-
-
-@app.on_event("startup")
-def start_stripe_event_worker():
-    Base.metadata.create_all(bind=engine)
