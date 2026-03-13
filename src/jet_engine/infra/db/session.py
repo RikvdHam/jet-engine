@@ -29,4 +29,3 @@ def get_db():
 
 def get_current_user_id(): #TODO: Extract from JWT/session/header
     return 1
-    

@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi.middleware import SlowAPIMiddleware
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
@@ -63,3 +64,4 @@ app.add_exception_handler(
         content={"detail": "Rate limit exceeded"}
     )
 )
+app.add_middleware(SlowAPIMiddleware)
