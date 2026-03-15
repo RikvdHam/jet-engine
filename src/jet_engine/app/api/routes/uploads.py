@@ -3,12 +3,12 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from sqlalchemy.orm import Session
 
+from jet_engine.infra.core.limiter import limiter
 from jet_engine.infra.db.session import get_db, get_current_user_id
 from jet_engine.app.services.dataset_service import process_csv_upload
 
 
 router = APIRouter()
-limiter = Limiter(key_func=get_remote_address)
 
 
 @router.post("/csv")

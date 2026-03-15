@@ -10,13 +10,15 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from sqlalchemy.orm import Session
 
+from jet_engine.infra.core.limiter import limiter
 from jet_engine.infra.core.config import settings
-from jet_engine.infra.db.models import Dataset, DatasetMapping, SignatureMapping
 from jet_engine.infra.db.session import get_db, get_current_user_id
+from jet_engine.infra.db.models import Dataset, DatasetMapping, SignatureMapping
 from jet_engine.app.services.dataset_query_service import get_raw_dataset_page, execute_query
 from jet_engine.app.services.dataset_validation_service import validate_dataset
 from jet_engine.app.services.dataset_transforming_service import transform_dataset
-from jet_engine.domain.request_models import ViewRequest
+from jet_engine.app.services.mapping_service import save_map
+from jet_engine.domain.request_models import ViewRequest, MappingRequest
 from jet_engine.domain.models import View
 from jet_engine.domain.models import Field
 from jet_engine.infra.core import QueryBuilder
@@ -25,7 +27,6 @@ from jet_engine.infra.core import QueryBuilder
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 router = APIRouter()
-limiter = Limiter(key_func=get_remote_address)
 
 
 @router.get("/{dataset_id}/data")
@@ -44,30 +45,17 @@ async def get(
 
 
 @router.post("/{dataset_id}/save-mapping")
+@limiter.limit("5/minute")
 async def save_mapping(
+    request: Request,
     dataset_id: str,
-    mapping: dict,  # raw_column -> field_id
+    mapping_request: MappingRequest,
     db: Session = Depends(get_db)
 ):
-    dataset = Dataset.load(db, dataset_id)
-    if not dataset:
-        raise HTTPException(status_code=404, detail="Dataset not found")
 
-    # Save mapping for this dataset
-    existing_mapping = DatasetMapping.load(db, dataset_id)
-    if existing_mapping:
-        existing_mapping.mapping_json = mapping
-    else:
-        db.add(DatasetMapping(dataset_id=dataset_id, mapping_json=mapping))
+    await save_map(dataset_id, mapping_request.mapping, db)
 
-    # Save mapping for future reference if new signature
-    existing_signature = SignatureMapping.load_mapping(db, dataset.signature)
-    if not existing_signature:
-        db.add(SignatureMapping(signature=dataset.signature, mapping_json=mapping))
-
-    db.commit()
-
-    return {"status": "mapped", "canonical_columns": list(mapping.values())}
+    return {"status": "mapped", "canonical_columns": list(mapping_request.mapping.values())}
 
 
 @router.get("/{dataset_id}/validate")

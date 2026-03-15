@@ -17,6 +17,7 @@ from jet_engine.infra.middleware.security_headers import SecurityHeadersMiddlewa
 from jet_engine.infra.middleware.trusted_host import add_trusted_hosts
 from jet_engine.infra.db.base import Base
 from jet_engine.infra.db.session import engine
+from jet_engine.infra.core.limiter import limiter
 
 
 @asynccontextmanager
@@ -55,7 +56,6 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
 )
 
-limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 app.add_exception_handler(
     RateLimitExceeded,

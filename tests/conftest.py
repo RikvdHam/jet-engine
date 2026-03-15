@@ -6,6 +6,7 @@ from fastapi.testclient import TestClient
 from jet_engine.main import app
 from jet_engine.infra.db import Base, get_db
 from jet_engine.infra.core.config import settings
+from jet_engine.infra.core.limiter import limiter
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
@@ -62,7 +63,7 @@ def storage_override(tmp_storage, monkeypatch):
 
 @pytest.fixture(autouse=True)
 def disable_rate_limiting():
-    app.state.limiter.enabled = False
+    limiter.enabled = False
 
 
 @pytest.fixture
@@ -76,4 +77,3 @@ def client(db_session, storage_override):
     yield TestClient(app)
 
     app.dependency_overrides.clear()
-
