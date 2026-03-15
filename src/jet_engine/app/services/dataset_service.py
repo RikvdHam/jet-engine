@@ -48,6 +48,8 @@ async def process_csv_upload(
         df.write_parquet(raw_file_path)
     except pl.exceptions.NoDataError:
         raise HTTPException(status_code=400, detail="CSV file is empty")
+    except pl.exceptions.ComputeError:
+        raise HTTPException(status_code=400, detail="Corrupted CSV file")
     finally:
         tmp_file_path.unlink(missing_ok=True)
 

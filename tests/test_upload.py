@@ -7,11 +7,11 @@ from tests.utils import get_test_file
 
 def test_upload_success(client, tmp_storage):
 
-    with open(get_test_file("journal_correct.csv"), "rb") as f:
+    with open(get_test_file("journal_data_valid.csv"), "rb") as f:
         response = client.post(
             "/api/uploads/csv",
             data={"company_name": "COMP A", "fiscal_year": 2025},
-            files={"file": ("journal_correct.csv", f, "text/csv")}
+            files={"file": ("journal_data_valid.csv", f, "text/csv")}
         )
 
     assert response.status_code == 200
@@ -38,11 +38,11 @@ def test_upload_rejects_non_csv(client):
 
 def test_dataset_metadata_written(client, db_session):
 
-    with open(get_test_file("journal_correct.csv"), "rb") as f:
+    with open(get_test_file("journal_data_valid.csv"), "rb") as f:
         response = client.post(
             "/api/uploads/csv",
             data={"company_name": "COMP A", "fiscal_year": 2025},
-            files={"file": ("journal_correct.csv", f, "text/csv")}
+            files={"file": ("journal_data_valid.csv", f, "text/csv")}
         )
 
     dataset_id = response.json()["dataset_id"]
@@ -56,11 +56,11 @@ def test_dataset_metadata_written(client, db_session):
 
 def test_parquet_contains_data(client, tmp_storage):
 
-    with open(get_test_file("journal_correct.csv"), "rb") as f:
+    with open(get_test_file("journal_data_valid.csv"), "rb") as f:
         response = client.post(
             "/api/uploads/csv",
             data={"company_name": "COMP A", "fiscal_year": 2025},
-            files={"file": ("journal_correct.csv", f, "text/csv")}
+            files={"file": ("journal_data_valid.csv", f, "text/csv")}
         )
 
     dataset_id = response.json()["dataset_id"]
@@ -84,13 +84,25 @@ def test_empty_csv(client):
     assert response.status_code in (200, 400)
 
 
-def test_tmp_file_removed(client, tmp_storage):
+def test_corrupted_csv(client):
 
-    with open(get_test_file("journal_correct.csv"), "rb") as f:
+    with open(get_test_file("journal_data_corrupted.csv"), "rb") as f:
         response = client.post(
             "/api/uploads/csv",
             data={"company_name": "COMP A", "fiscal_year": 2025},
-            files={"file": ("journal_correct.csv", f, "text/csv")}
+            files={"file": ("journal_data_corrupted.csv", f, "text/csv")}
+        )
+
+    assert response.status_code == 400
+
+
+def test_tmp_file_removed(client, tmp_storage):
+
+    with open(get_test_file("journal_data_valid.csv"), "rb") as f:
+        response = client.post(
+            "/api/uploads/csv",
+            data={"company_name": "COMP A", "fiscal_year": 2025},
+            files={"file": ("journal_data_valid.csv", f, "text/csv")}
         )
 
     tmp_files = list(tmp_storage["tmp"].glob("*.csv"))

@@ -33,7 +33,7 @@ class FieldRegistry:
         if not field_ids:
             return self._fields
 
-        return [self._registry.get(fid) for fid in self._registry.keys()]
+        return [self.get_field(fid) for fid in field_ids]
 
 
 field_registry = FieldRegistry()
