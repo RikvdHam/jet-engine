@@ -1,0 +1,11 @@
+journal_number,dc_flag,amount_value,abs_amount_value,description
+JRN-1001,D,1500.00,1500.00,Invoice payment
+JRN-1001,,-1500.00,1500.00,Bank payment
+JRN-1002,D,250.75,250.75,Office supplies
+JRN-1002,C,-250.75,250.75,Credit card payment
+JRN-1003,D,12000.00,12000.00,Equipment purchase
+JRN-1003,C,-12000.00,12000.00,Bank transfer
+JRN-1004,D,89.99,abc,Software subscription
+JRN-1004,C,-89.99,89.99,Stripe payment
+JRN-1005,D,5000.00,5000.00,Consulting services
+JRN-1005,C,-5000.00,5000.00,Bank payment

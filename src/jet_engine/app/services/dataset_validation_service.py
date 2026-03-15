@@ -36,7 +36,12 @@ def validate_dataset(db: Session, dataset_id: str) -> Dict:
     if not os.path.exists(raw_path):
         raise HTTPException(status_code=404, detail="Raw file missing")
 
-    lf = pl.scan_parquet(raw_path).select(required_raw_cols).rename(rename_dict).with_row_count("row_id")
+    lf = (
+        pl.scan_parquet(raw_path)
+        .select(required_raw_cols)
+        .rename(rename_dict)
+        .with_row_index("row_id")  # updated
+    )
 
     # Build error expressions
     errors = []
@@ -51,7 +56,7 @@ def validate_dataset(db: Session, dataset_id: str) -> Dict:
                 .otherwise(None)
             )
 
-        if field.data_type == "int":
+        if field.dtype == "int":
             errors.append(
                 pl.when(
                     pl.col(field_name).is_not_null() &
@@ -61,7 +66,7 @@ def validate_dataset(db: Session, dataset_id: str) -> Dict:
                 .otherwise(None)
             )
 
-        elif field.data_type == "float":
+        elif field.dtype == "float":
             errors.append(
                 pl.when(
                     pl.col(field_name).is_not_null() &
@@ -71,7 +76,7 @@ def validate_dataset(db: Session, dataset_id: str) -> Dict:
                 .otherwise(None)
             )
 
-        elif field.data_type == "date":
+        elif field.dtype == "date":
             errors.append(
                 pl.when(
                     pl.col(field_name).is_not_null() &
@@ -80,8 +85,6 @@ def validate_dataset(db: Session, dataset_id: str) -> Dict:
                 .then(pl.lit(f"{field_name} invalid date"))
                 .otherwise(None)
             )
-
-    #TODO: Build debit, credit combo validation
 
     if errors:
         error_list = pl.concat_list(errors).list.drop_nulls()
@@ -105,7 +108,7 @@ def validate_dataset(db: Session, dataset_id: str) -> Dict:
 
     summary = (
         lf.select([
-            pl.count().alias("total_rows"),
+            pl.len().alias("total_rows"),
             pl.col("is_valid").sum().alias("valid_rows")
         ])
         .collect()

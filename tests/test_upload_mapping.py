@@ -4,28 +4,6 @@ import json
 from tests.utils import get_test_file
 
 
-@pytest.fixture
-def uploaded_dataset(client):
-
-    with open(get_test_file("sample_upload.csv"), "rb") as f:
-        response = client.post(
-            "/api/uploads/csv",
-            data={"company_name": "TEST_COMPANY", "fiscal_year": 2025},
-            files={"file": ("sample_upload.csv", f, "text/csv")}
-        )
-
-    assert response.status_code == 200
-
-    return response.json()
-
-
-@pytest.fixture
-def journal_mapping():
-
-    with open(get_test_file("journal_mapping.json")) as f:
-        return json.load(f)
-
-
 def test_save_valid_mapping(client, uploaded_dataset, journal_mapping):
 
     dataset_id = uploaded_dataset["dataset_id"]

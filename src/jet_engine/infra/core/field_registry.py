@@ -20,9 +20,9 @@ class FieldRegistry:
             data = json.load(f)
         
         self._fields = [Field.model_validate(f) for f in data]
-        self._registry = {f.id: f for f in self._fields}
+        self._registry = {str(f.id): f for f in self._fields}
 
-    def get_field(self, field_id: uuid.UUID) -> Field:
+    def get_field(self, field_id: str) -> Field:
         field: Field = self._registry.get(field_id, None)
         if not field:
             raise Exception(f"Unknown field ID: {field_id}")

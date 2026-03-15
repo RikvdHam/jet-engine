@@ -59,7 +59,9 @@ async def save_mapping(
 
 
 @router.get("/{dataset_id}/validate")
+@limiter.limit("10/minute")
 async def validate(
+        request: Request,
         dataset_id: str,
         db: Session = Depends(get_db)
 ):
