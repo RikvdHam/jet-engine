@@ -60,6 +60,11 @@ def storage_override(tmp_storage, monkeypatch):
     return tmp_storage
 
 
+@pytest.fixture(autouse=True)
+def disable_rate_limiting():
+    app.state.limiter.enabled = False
+
+
 @pytest.fixture
 def client(db_session, storage_override):
 
@@ -67,8 +72,8 @@ def client(db_session, storage_override):
         yield db_session
 
     app.dependency_overrides[get_db] = override_get_db
-    app.state.limiter.enabled = False
 
     yield TestClient(app)
 
     app.dependency_overrides.clear()
+

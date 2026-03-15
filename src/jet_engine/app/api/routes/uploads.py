@@ -24,4 +24,4 @@ async def upload_csv(
     if not file.filename.endswith(".csv"):
         raise HTTPException(status_code=400, detail="Only CSV files allowed")
 
-    return process_csv_upload(company_name, fiscal_year, file, current_user_id, db)
+    return await process_csv_upload(company_name, fiscal_year, file, current_user_id, db)

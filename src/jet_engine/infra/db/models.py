@@ -42,7 +42,7 @@ class Dataset(Base):
     data_hash = Column(String, nullable=False)
     last_accessed_at = Column(DateTime(timezone=True), nullable=False, 
                               server_default=func.now())
-    views = relationship("DatasetView", back_populates="dataset")
+    views = relationship("ViewORM", back_populates="dataset")
 
     __table_args__ = (
         UniqueConstraint("stored_filename", name="uk_stored_filename"),

@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_upload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/db/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/db/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/session.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/test.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_upload.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
