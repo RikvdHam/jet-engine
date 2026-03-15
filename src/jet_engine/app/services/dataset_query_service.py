@@ -3,6 +3,7 @@ import uuid
 import duckdb
 from pathlib import Path
 from typing import Dict, Optional
+from datetime import datetime
 
 import duckdb
 from sqlalchemy.orm import Session
@@ -65,6 +66,7 @@ def execute_query(db: Session, request: ViewRequest, dataset_id: str, user_id: i
     arrow_table = result.arrow()
 
     # --- 4. Save view in DB
+    #TODO: Save view in DB
 
     # --- 5. Response serialization
     return _arrow_response(arrow_table)
@@ -82,34 +84,34 @@ def _arrow_response(table):
         media_type="application/vnd.apache.arrow.stream"
     )
 
-#TODO: Create this again
 
-# def create_view(db: Session, dataset_id: str, current_user_id: int, filters: Dict, dimensions: Dict,
-#                 measures: Dict, parent_view_id: Optional[str] = None) -> DatasetView:
-#     signature = DatasetView.build_signature(dataset_id, {}, {}, {})
-#     existing_view = DatasetView.load(db, signature)
-#     if existing_view:
-#         return existing_view
-#
-#     if not parent_view_id:
-#         view_id = dataset_id
-#     else:
-#         view_id = str(uuid.uuid4())
-#
-#     try:
-#         view = DatasetView(
-#             id=view_id,
-#             dataset_id=dataset_id,
-#             filters_json=filters,
-#             dimensions_json=dimensions,
-#             measures_json=measures,
-#             signature=signature,
-#             parent_view_id=parent_view_id,
-#             created_by=current_user_id
-#         )
-#         db.add(view)
-#         db.commit()
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
-#
-#     return view
+def create_initial_view(db: Session, dataset_id: str, current_user_id: int) -> View:
+    view_dict = {
+        "id": dataset_id,
+        "dataset_id": dataset_id,
+        "dimensions": [],
+        "measures": [],
+        "filters": None,
+        "sorting": [],
+        "pagination": None,
+        "parent_view_id": None,
+        "created_by": current_user_id
+    }
+
+    view = View(**view_dict)
+    signature = view.build_signature()
+
+    try:
+        viewORM = ViewORM.load(db, signature)
+        if viewORM:
+            viewORM.last_accessed_at = datetime.now()
+            db.commit()
+            return view
+
+        viewORM = ViewORM.from_domain(view)
+        db.add(viewORM)
+        db.commit()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    return view

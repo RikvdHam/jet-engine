@@ -8,7 +8,7 @@ from fastapi import HTTPException
 
 from jet_engine.infra.db.models import ViewORM, User, Dataset
 from jet_engine.infra.core.config import settings
-# from jet_engine.app.services.dataset_query_service import create_view
+from jet_engine.app.services.dataset_query_service import create_initial_view
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +20,7 @@ def has_columns(lf: pl.LazyFrame, *cols: str) -> bool:
 
 
 def standardize_amounts(lf: pl.LazyFrame) -> pl.LazyFrame:
-    if has_columns(lf, "debit_amount", "credit_amount"):
+    if has_columns(lf, "debit_amount", "credit`s_amount"):
         # Compute signed amount and standardized flag
         lf = lf.with_columns([
             # amount = debit - abs(credit)
@@ -28,21 +28,21 @@ def standardize_amounts(lf: pl.LazyFrame) -> pl.LazyFrame:
              pl.coalesce([pl.col("credit_amount").abs(), pl.lit(0)])
              ).alias("amount"),
 
-            # debit_credit_flag based on amount
+            # debit_credit_indicator based on amount
             pl.when(pl.col("debit_amount").is_not_null() | pl.col("credit_amount").is_not_null())
             .then(
-                pl.when((pl.col("debit_amount") - pl.col("credit_amount").abs()) > 0).then("D")
-                .when((pl.col("debit_amount") - pl.col("credit_amount").abs()) < 0).then("C")
-                .otherwise("N")
+                pl.when((pl.col("debit_amount") - pl.col("credit_amount").abs()) > 0).then(pl.lit("D"))
+                .when((pl.col("debit_amount") - pl.col("credit_amount").abs()) < 0).then(pl.lit("C"))
+                .otherwise(pl.lit("N"))
             )
             .otherwise("UNKNOWN")
-            .alias("debit_credit_flag")
+            .alias("debit_credit_indicator")
         ]).drop(["debit_amount", "credit_amount"])
 
-    elif has_columns(lf, "amount", "debit_credit_flag"):
+    elif has_columns(lf, "amount", "debit_credit_indicator"):
         # Standardize flag to D/C/N/UNKNOWN
         lf = lf.with_columns([
-            pl.col("debit_credit_flag")
+            pl.col("debit_credit_indicator")
             .cast(pl.Utf8)
             .str.strip_chars()
             .str.to_lowercase()
@@ -50,11 +50,12 @@ def standardize_amounts(lf: pl.LazyFrame) -> pl.LazyFrame:
             .alias("_dc_first")
         ])
         lf = lf.with_columns([
-            pl.when(pl.col("_dc_first") == "d").then("D")
-            .when(pl.col("_dc_first") == "c").then("C")
-            .when(pl.col("_dc_first") == "n").then("N")
-            .otherwise("UNKNOWN")
-            .alias("debit_credit_flag")
+            pl.when(pl.col("_dc_first") == "c")
+            .then(pl.lit("C"))
+            .when(pl.col("_dc_first") == "d")
+            .then(pl.lit("D"))
+            .otherwise(pl.lit("UNKNOWN"))
+            .alias("debit_credit_indicator")
         ]).drop("_dc_first")
 
     else:
@@ -62,8 +63,8 @@ def standardize_amounts(lf: pl.LazyFrame) -> pl.LazyFrame:
 
     # Ensure amount matches sign convention
     lf = lf.with_columns([
-        pl.when(pl.col("debit_credit_flag") == "D").then(pl.col("amount").abs())
-        .when(pl.col("debit_credit_flag") == "C").then(-pl.col("amount").abs())
+        pl.when(pl.col("debit_credit_indicator") == "D").then(pl.col("amount").abs())
+        .when(pl.col("debit_credit_indicator") == "C").then(-pl.col("amount").abs())
         .otherwise(pl.col("amount"))
         .alias("amount")
     ])
@@ -75,17 +76,86 @@ def standardize_account_codes(lf: pl.LazyFrame) -> pl.LazyFrame:
     if has_columns(lf, "account_number"):
         lf = lf.with_columns([
             pl.col("account_number")
+            .cast(pl.Utf8)
             .str.strip_chars()
             .str.to_uppercase()
             .alias("account_number")
         ])
+
     if has_columns(lf, "offset_account_number"):
         lf = lf.with_columns([
             pl.col("offset_account_number")
+            .cast(pl.Utf8)
             .str.strip_chars()
             .str.to_uppercase()
             .alias("offset_account_number")
         ])
+
+    return lf
+
+
+def enrich_with_helper_columns(lf: pl.LazyFrame) -> pl.LazyFrame:
+    exprs = []
+
+    # -------------------------
+    # Monetary helpers
+    # -------------------------
+    if has_columns(lf, "amount"):
+        exprs += [
+            pl.col("amount").abs().alias("abs_amount"),
+            pl.when(pl.col("amount") > 0)
+            .then(1)
+            .otherwise(-1)
+            .alias("amount_sign")
+        ]
+
+        abs_amount = pl.col("amount").abs().cast(pl.Int64).cast(pl.Utf8)
+
+        exprs += [
+            abs_amount.str.slice(0, 1).alias("first_digit"),
+            abs_amount.str.slice(0, 2).alias("first_two_digits"),
+        ]
+
+    # -------------------------
+    # Date helpers
+    # -------------------------
+    if has_columns(lf, "posting_date"):
+        posting_date = pl.col("posting_date").str.strptime(pl.Date, strict=False)
+
+        exprs += [
+            posting_date.dt.year().alias("posting_year"),
+            posting_date.dt.month().alias("posting_month"),
+            posting_date.dt.day().alias("posting_day"),
+            posting_date.dt.weekday().alias("posting_weekday"),
+        ]
+
+    # -------------------------
+    # Time helpers
+    # -------------------------
+    if has_columns(lf, "posting_time"):
+        posting_time = pl.col("posting_time").str.strptime(pl.Time, strict=False)
+
+        exprs += [
+            posting_time.dt.hour().alias("posting_hour"),
+            posting_time.dt.minute().alias("posting_minute"),
+        ]
+
+    # -------------------------
+    # Text helpers
+    # -------------------------
+    if has_columns(lf, "description"):
+        exprs += [
+            pl.col("description").str.len_chars().alias("description_length"),
+            pl.col("description").is_not_null().alias("has_description"),
+        ]
+
+    if has_columns(lf, "reference"):
+        exprs += [
+            pl.col("reference").is_not_null().alias("has_reference"),
+        ]
+
+    if exprs:
+        lf = lf.with_columns(exprs)
 
     return lf
 
@@ -113,18 +183,18 @@ def transform_dataset(db: Session, dataset_id: str, current_user_id: int) -> Vie
     # --- 5. Standardize account codes
     lf = standardize_account_codes(lf)
 
+    # --- 6. Add helper columns
+    lf = enrich_with_helper_columns(lf)
 
-    #TODO: Add weekends, year, month, absolute amount, etc.
+    view = create_initial_view(db, dataset_id, current_user_id)
+    file_path = Path(settings.storage_transformed_dir) / f"{dataset_id}.parquet"
 
-    current_user_id = 1 #TODO: FROM current_user
-    #TODO: activate again
-    view = {}
-    # view = create_view(db, dataset_id, current_user_id, {}, {}, {})
-    # file_path = os.path.join(BASE_DIR, settings.storage_views_dir, f"{view.id}.parquet")
-    #
-    # lf.sink_parquet(
-    #     file_path,
-    #     compression="zstd"
-    # )
+    # Ensure parent directory exists
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    lf.sink_parquet(
+        file_path,
+        compression="zstd"
+    )
 
     return view

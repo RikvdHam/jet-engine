@@ -183,8 +183,8 @@ class ViewORM(Base):
             filters_json=view.filters.model_dump() if view.filters else None,
             dimensions_json=[d.model_dump() for d in view.dimensions],
             measures_json=[m.model_dump() for m in view.measures],
-            sorting_json = [s.model_dump() for s in view.sorting],
-            pagination=view.pagination.model_dump(),
+            sorting_json = [s.model_dump() for s in view.sorting] if view.sorting else None,
+            pagination=view.pagination.model_dump() if view.pagination else None,
             signature=view.build_signature(),
             parent_view_id=view.parent_view_id,
             created_by=view.created_by 

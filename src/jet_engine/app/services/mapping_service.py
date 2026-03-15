@@ -49,12 +49,12 @@ async def validate_map(mapping: dict) -> None:
     debit_amount_id = next((str(f.id) for f in field_registry.all() if f.canonical_name == "debit_amount"), None)
     credit_amount_id = next((str(f.id) for f in field_registry.all() if f.canonical_name == "credit_amount"), None)
     amount_id = next((str(f.id) for f in field_registry.all() if f.canonical_name == "amount"), None)
-    debit_credit_flag_id = next(
+    debit_credit_indicator_id = next(
         (str(f.id) for f in field_registry.all() if f.canonical_name == "debit_credit_indicator"), None)
 
     # Check which groups are mapped
     debit_credit_group_1 = debit_amount_id in mapped_fields and credit_amount_id in mapped_fields
-    debit_credit_group_2 = amount_id in mapped_fields and debit_credit_flag_id in mapped_fields
+    debit_credit_group_2 = amount_id in mapped_fields and debit_credit_indicator_id in mapped_fields
 
     if not (debit_credit_group_1 or debit_credit_group_2):
         raise HTTPException(
