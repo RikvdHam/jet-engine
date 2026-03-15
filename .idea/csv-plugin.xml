@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\tests\data\journal_correct.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\tests\data\journal_invalid_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\tests\data\sample_upload.csv">
           <value>
             <Attribute>

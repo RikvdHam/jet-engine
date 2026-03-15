@@ -18,6 +18,7 @@ class Field(BaseModel):
     filter_operators: List[FilterOperator] = []
     
     is_required: bool = False
+    is_mandatory: bool = True
     group: Optional[str] = None
     
     def __str__(self) -> str:

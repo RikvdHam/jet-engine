@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     storage_tmp_dir: str
     storage_raw_dir: str
     storage_validated_dir: str
+    storage_transformed_dir: str
     storage_views_dir: str
     storage_static_dir: str
 

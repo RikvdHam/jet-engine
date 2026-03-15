@@ -88,11 +88,11 @@ def client(db_session, storage_override):
 @pytest.fixture
 def uploaded_dataset(client):
 
-    with open(get_test_file("sample_upload.csv"), "rb") as f:
+    with open(get_test_file("journal_correct.csv"), "rb") as f:
         response = client.post(
             "/api/uploads/csv",
             data={"company_name": "TEST_COMPANY", "fiscal_year": 2025},
-            files={"file": ("sample_upload.csv", f, "text/csv")}
+            files={"file": ("journal_correct.csv", f, "text/csv")}
         )
 
     assert response.status_code == 200
@@ -118,5 +118,5 @@ def uploaded_invalid_dataset(client):
 @pytest.fixture
 def journal_mapping():
 
-    with open(get_test_file("journal_mapping.json")) as f:
+    with open(get_test_file("journal_mapping_correct.json")) as f:
         return json.load(f)

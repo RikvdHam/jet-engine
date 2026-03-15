@@ -2,16 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/data/invalid_data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_validation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/data/journal_correct.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/data/journal_invalid_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/data/journal_mapping_correct.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_validation_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_validation_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/core/field_registry.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/field_registry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/domain/models/field.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/field.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/static/fields.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/static/fields.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/test.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/journal_mapping.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_upload.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_upload_mapping.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_upload_mapping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_validation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +34,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="3AY5cdkdUJ9bXqDYz9pK1T8VULw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />

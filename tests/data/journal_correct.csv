@@ -1,0 +1,11 @@
+document_number,transaction_number,line_number,posting_date,entry_date,posting_time,amount,debit_credit_indicator,debit_amount,credit_amount,currency,account_number,account_name,offset_account_number,user_id,approver_id,approval_status,journal_type,journal_category,description,reference
+DOC001,TXN001,1,2026-03-01,2026-03-01,08:30:00,100.00,D,100.00,0.00,USD,4000,Cash,1000,USR01,APR01,Approved,Manual,Revenue,"Cash sale","INV001"
+DOC002,TXN002,1,2026-03-01,2026-03-01,09:00:00,-50.00,C,0.00,50.00,USD,5000,Accounts Receivable,2000,USR02,APR02,Pending,System,Invoice,"Customer payment","INV002"
+DOC003,TXN003,1,2026-03-02,2026-03-02,10:15:00,250.00,D,250.00,0.00,USD,4000,Cash,1000,USR03,APR01,Approved,Manual,Revenue,"Cash deposit","DEP001"
+DOC004,TXN004,1,2026-03-02,2026-03-02,11:45:00,-120.00,C,0.00,120.00,USD,5000,Accounts Receivable,2000,USR01,APR03,Rejected,System,Invoice,"Customer refund","RF001"
+DOC005,TXN005,1,2026-03-03,2026-03-03,12:00:00,300.00,D,300.00,0.00,USD,4000,Cash,1000,USR02,APR02,Approved,Manual,Revenue,"Cash sale","INV003"
+DOC006,TXN006,1,2026-03-03,2026-03-03,13:30:00,-75.00,C,0.00,75.00,USD,5000,Accounts Receivable,2000,USR03,APR01,Approved,System,Invoice,"Customer payment","INV004"
+DOC007,TXN007,1,2026-03-04,2026-03-04,14:45:00,400.00,D,400.00,0.00,USD,4000,Cash,1000,USR01,APR02,Pending,Manual,Revenue,"Cash sale","INV005"
+DOC008,TXN008,1,2026-03-04,2026-03-04,15:30:00,-60.00,C,0.00,60.00,USD,5000,Accounts Receivable,2000,USR02,APR03,Rejected,System,Invoice,"Customer refund","RF002"
+DOC009,TXN009,1,2026-03-05,2026-03-05,16:15:00,150.00,D,150.00,0.00,USD,4000,Cash,1000,USR03,APR01,Approved,Manual,Revenue,"Cash deposit","DEP002"
+DOC010,TXN010,1,2026-03-05,2026-03-05,17:00:00,-200.00,C,0.00,200.00,USD,5000,Accounts Receivable,2000,USR01,APR02,Approved,System,Invoice,"Customer payment","INV006"

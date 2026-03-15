@@ -17,7 +17,7 @@ from jet_engine.infra.db.models import Dataset, DatasetMapping, SignatureMapping
 from jet_engine.app.services.dataset_query_service import get_raw_dataset_page, execute_query
 from jet_engine.app.services.dataset_validation_service import validate_dataset
 from jet_engine.app.services.dataset_transforming_service import transform_dataset
-from jet_engine.app.services.mapping_service import save_map
+from jet_engine.app.services.mapping_service import validate_map, save_map
 from jet_engine.domain.request_models import ViewRequest, MappingRequest
 from jet_engine.domain.models import View
 from jet_engine.domain.models import Field
@@ -52,14 +52,14 @@ async def save_mapping(
     mapping_request: MappingRequest,
     db: Session = Depends(get_db)
 ):
-
+    await validate_map(mapping_request.mapping)
     await save_map(dataset_id, mapping_request.mapping, db)
 
     return {"status": "mapped", "canonical_columns": list(mapping_request.mapping.values())}
 
 
 @router.get("/{dataset_id}/validate")
-@limiter.limit("10/minute")
+@limiter.limit("5/minute")
 async def validate(
         request: Request,
         dataset_id: str,
@@ -69,12 +69,14 @@ async def validate(
 
 
 @router.get("/{dataset_id}/transform")
-async def transform( #TODO: AFTER TRANSFORM: GET LAST VIEW, SO MAKE VIEW OF TRANSFORMED DATASET
+@limiter.limit("5/minute")
+async def transform(
+        request: Request,
         dataset_id: str,
         db: Session = Depends(get_db),
-        # current_user: User = Depends(get_current_user), #TODO: Build get_current_user, so we can use this (default 123..)
+        current_user_id: int = Depends(get_current_user_id)
 ):
-    return transform_dataset(db, dataset_id, {})
+    return transform_dataset(db, dataset_id, current_user_id)
 
 
 @router.post("/{dataset_id}/query")
