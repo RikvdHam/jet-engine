@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_transform.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_query.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.dev.in" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.dev.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/core/query_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/core/query_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/raw/1b0c6eac-9590-4a0b-b98c-72ff7d5dcbb0.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/raw/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/validated/1b0c6eac-9590-4a0b-b98c-72ff7d5dcbb0.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/validated/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/views/98b1cf51-d820-4028-8325-74a5666c5b28.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/views/e3fbccbf-9645-4d24-bef4-bf05020865af.parquet" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/test.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

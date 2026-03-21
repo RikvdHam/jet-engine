@@ -93,13 +93,17 @@ class QueryBuilder:
             if not field.allows_role(FieldRole.MEASURE):
                 raise Exception(f"Field has not a measure role: {field}")
 
-            aggregation = measure.aggregation
-            if not field.allows_aggregation(aggregation):
-                raise Exception(f"Aggregation {aggregation.name} not allowed "
-                                f"for field: {field}")
+            aggregations = measure.aggregations
+            if not aggregations:
+                continue
 
-            measure_list.append(f"{aggregation.name}({field.canonical_name}) AS "
-                                f"{field.canonical_name}_{aggregation.value}")
+            for aggregation in aggregations:
+                if not field.allows_aggregation(aggregation):
+                    raise Exception(f"Aggregation {aggregation.name} not allowed "
+                                    f"for field: {field}")
+
+                measure_list.append(f"{aggregation.name}({field.canonical_name}) AS "
+                                    f"{field.canonical_name}_{aggregation.value}")
 
         return measure_list
 
