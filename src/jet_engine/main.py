@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -18,6 +19,11 @@ from jet_engine.infra.middleware.trusted_host import add_trusted_hosts
 from jet_engine.infra.db.base import Base
 from jet_engine.infra.db.session import engine
 from jet_engine.infra.core.limiter import limiter
+
+
+# Determine absolute path to static folder
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "app" / "static"
 
 
 @asynccontextmanager
@@ -38,6 +44,8 @@ app = FastAPI(
     docs_url=None if settings.is_production else "/docs",
     lifespan=lifespan
 )
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 app.include_router(api_router)
 

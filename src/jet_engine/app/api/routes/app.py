@@ -1,0 +1,25 @@
+from pathlib import Path
+
+from fastapi import APIRouter, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+
+# Determine templates folder relative to this file
+BASE_DIR = Path(__file__).resolve().parents[1]
+TEMPLATES_DIR = BASE_DIR.parent / "templates"
+
+
+router = APIRouter()
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
+
+
+@router.get("/upload", response_class=HTMLResponse)
+async def upload(request: Request):
+    return templates.TemplateResponse(
+        "upload.html",
+        {
+            "request": request,
+            "active_page": "upload"
+         }
+    )

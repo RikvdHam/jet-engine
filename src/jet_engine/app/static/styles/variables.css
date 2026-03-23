@@ -1,0 +1,13 @@
+:root {
+    --primary: #1a3147;
+    --primary-light: rgba(26,49,71,0.08);
+
+    --bg-page: #f7f9fb;
+    --bg-card: #ffffff;
+    --bg-subtle: #eef2f6;
+
+    --border: #e1e6eb;
+
+    --text-primary: #1f2d3d;
+    --text-secondary: #6b7a8c;
+}
