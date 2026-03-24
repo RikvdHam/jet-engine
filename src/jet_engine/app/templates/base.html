@@ -19,11 +19,83 @@
 
 <div class="sidebar" id="sidebar">
     <div class="nav-items">
-        <a href="/app/upload" class="{% if active_page == 'upload' %}active{% endif %}"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 384"><path fill="var(--primary)" d="M171 363H64V192H0L213 0l214 192h-64v171H256V235h-85v128z"/></svg></div><span>Upload</span></a>
-        <a href="/app/column-mapping" class="{% if active_page == 'column-mapping' %}active{% endif %}"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--primary)"><g fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" color="currentColor"><path d="M14.98 7.016s.5.5 1 1.5c0 0 1.589-2.5 3-3M9.995 2.021c-2.499-.105-4.429.182-4.429.182c-1.219.088-3.555.77-3.555 4.762c0 3.956-.025 8.834 0 10.779c0 1.188.736 3.96 3.282 4.108c3.095.18 8.67.219 11.228 0c.684-.039 2.964-.576 3.252-3.056c.299-2.57.24-4.355.24-4.78"/><path d="M22 7.016c0 2.761-2.24 5-5.005 5a5 5 0 0 1-5.005-5c0-2.762 2.241-5 5.005-5a5 5 0 0 1 5.005 5m-15.02 6h4m-4 4h8"/></g></svg></div><span>Column Mapping</span></a>
-        <a href="/app/validate" class="{% if active_page == 'validate' %}active{% endif %}"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="var(--primary)" d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"/></svg></div><span>Validate Data</span></a>
-        <a href="/app/workspace" class="{% if active_page == 'workspace' %}active{% endif %}"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="var(--primary)" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Zm11-9c0 6.075-4.925 11-11 11S1 18.075 1 12S5.925 1 12 1s11 4.925 11 11Zm-8 4.414l-4-4V5.5h2v6.086L16.414 15L15 16.414Z"/></svg></div><span>Workspace</span></a>
-        <a href="/app/export-reports" class="{% if active_page == 'export-reports' %}active{% endif %}"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="var(--primary)" d="M32 376a56 56 0 0 0 56 56h336a56 56 0 0 0 56-56V222H32Zm66-76a30 30 0 0 1 30-30h48a30 30 0 0 1 30 30v20a30 30 0 0 1-30 30h-48a30 30 0 0 1-30-30ZM424 80H88a56 56 0 0 0-56 56v26h448v-26a56 56 0 0 0-56-56Z"/></svg></div><span>Export Report</span></a>
+        <a href="/app/upload" class="{% if active_page == 'upload' %}active{% endif %}"><div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 8L12 4L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 16V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V16"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            </div><span>Upload</span>
+        </a>
+        <a href="/app/column-mapping" class="{% if active_page == 'column-mapping' %}active{% endif %}"><div class="icon">
+            <svg viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <!-- Left columns -->
+              <rect x="3" y="5" width="5" height="2.5" rx="1"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <rect x="3" y="10.5" width="5" height="2.5" rx="1"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <rect x="3" y="16" width="5" height="2.5" rx="1"
+                    stroke="currentColor" stroke-width="1.8"/>
+
+              <!-- Right nodes -->
+              <circle cx="20" cy="6.5" r="1.2" fill="currentColor"/>
+              <circle cx="20" cy="12" r="1.2" fill="currentColor"/>
+              <circle cx="20" cy="17.5" r="1.2" fill="currentColor"/>
+
+              <!-- Mapping lines -->
+              <path d="M8 6.25C12 6.25 12 6.5 18.8 6.5"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M8 11.75C12 11.75 12 17.5 18.8 17.5"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M8 17.25C12 17.25 12 12 18.8 12"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+
+            </svg>
+            </div><span>Column Mapping</span>
+        </a>
+        <a href="/app/validate" class="{% if active_page == 'validate' %}active{% endif %}"><div class="icon">
+            <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                <path d="M8.5 14.5h7.657"/>
+                <path d="M8.5 10.5h7.657"/>
+                <path d="M8.5 6.5h7.657"/>
+                <path d="M5.5 14.5h0"/>
+                <path d="M5.5 10.5h0"/>
+                <path d="M5.5 6.5h0"/>
+              </g>
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9.128 20.197H3.444a2.22 2.22 0 01-2.229-2.153V3.152A2.153 2.153 0 013.367.997h15.48A2.153 2.153 0 0121 3.152v8.738"/>
+              <path fill="currentColor" d="M16.5 23.499a1.464 1.464 0 01-1.094-.484l-2.963-2.969A1.479 1.479 0 0112 18.985a1.5 1.5 0 01.462-1.078 1.56 1.56 0 012.113.037l1.925 1.931 4.943-4.959a1.543 1.543 0 012.132.02 1.461 1.461 0 01.425 1.04 1.5 1.5 0 01-.45 1.068l-5.993 6.012a1.44 1.44 0 01-1.057.443z"/>
+            </svg>
+            </div><span>Validate Data</span>
+        </a>
+        <a href="/app/workspace" class="{% if active_page == 'workspace' %}active{% endif %}"><div class="icon">
+            <svg viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <rect x="3" y="3" width="8" height="8" rx="2"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <rect x="13" y="3" width="8" height="5" rx="2"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <rect x="13" y="10" width="8" height="11" rx="2"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <rect x="3" y="13" width="8" height="8" rx="2"
+                    stroke="currentColor" stroke-width="1.8"/>
+
+            </svg>
+            </div><span>Workspace</span>
+        </a>
+        <a href="/app/export-reports" class="{% if active_page == 'export-reports' %}active{% endif %}"><div class="icon">
+            <svg fill="currentColor" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>export-line</title>
+                <path d="M6,13.61h7.61V6H24v8.38h2V6a2,2,0,0,0-2-2H10.87L4,10.87V30a2,2,0,0,0,2,2H24a2,2,0,0,0,2-2H6Zm0-1.92L11.69,6H12v6H6Z" class="clr-i-outline clr-i-outline-path-1"></path><path d="M28.32,16.35a1,1,0,0,0-1.41,1.41L30.16,21H18a1,1,0,0,0,0,2H30.19l-3.28,3.28a1,1,0,1,0,1.41,1.41L34,22Z" class="clr-i-outline clr-i-outline-path-2"></path>
+                <rect x="0" y="0" width="36" height="36" fill-opacity="0"/>
+            </svg>
+            </div><span>Export Report</span>
+        </a>
     </div>
 
     <div class="offline-container">

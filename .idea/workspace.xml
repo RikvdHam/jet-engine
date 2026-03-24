@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/base.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/upload.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/upload.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/variables.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/upload.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
