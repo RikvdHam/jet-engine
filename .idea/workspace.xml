@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/upload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/styles/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/styles/upload.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/upload.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/templates/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/upload.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

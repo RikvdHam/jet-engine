@@ -12,96 +12,110 @@ Step 1 — Upload Journal Entries
 
 {% block content %}
 
-<!--<div class="step-header">-->
-<!--    <div>-->
-<!--        <h2>Upload your journal entry file</h2>-->
-<!--        <p>Provide your dataset and basic company information to begin the audit process.</p>-->
-<!--    </div>-->
-<!--    <div class="step-indicator">Step 1 of 7</div>-->
-<!--</div>-->
+<div class="grid">
+    <!-- Upload -->
+    <div class="card upload-card">
+        <h3>Upload File</h3>
+        <p class="card-subtext">Supported format: CSV</p>
 
-<!--<div class="upload-layout">-->
+        <div class="dropzone" id="dropzone">
+            <h2 id="dropTitle">Drag & drop your Excel file</h2>
+            <p id="dropText">or click to browse</p>
+            <input type="file" id="fileInput" hidden accept=".xlsx" />
+        </div>
 
-<!--    &lt;!&ndash; LEFT: Upload &ndash;&gt;-->
-<!--    <div class="card upload-card">-->
+        <div class="progress" id="progressSection" style="display:none;">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="file-info" id="fileInfo"></div>
+        </div>
 
-<!--        <h3>Upload File</h3>-->
-<!--        <p class="card-subtext">Supported format: CSV</p>-->
+    </div>
 
-<!--        <div class="dropzone" id="dropzone">-->
-<!--            <div class="upload-icon">⬆</div>-->
-<!--            <h2 id="dropTitle">Drag & drop your file</h2>-->
-<!--            <p id="dropText">or click to browse</p>-->
-<!--            <input type="file" id="fileInput" hidden accept=".csv" />-->
-<!--        </div>-->
+    <!-- Metadata -->
+    <div class="card">
+        <h3>Engagement Details</h3>
 
-<!--        <div class="progress" id="progressSection" style="display:none;">-->
-<!--            <div class="progress-bar">-->
-<!--                <div class="progress-fill" id="progressFill"></div>-->
-<!--            </div>-->
-<!--            <div class="file-info" id="fileInfo"></div>-->
-<!--        </div>-->
+        <div class="form-group">
+            <label>Company Name *</label>
+            <input type="text" id="companyName">
+        </div>
 
-<!--        <div class="actions" id="actionButtons" style="display:none;">-->
-<!--            <button class="secondary-btn" id="resetUploadBtn">Upload another file</button>-->
-<!--        </div>-->
-<!--    </div>-->
+        <div class="form-group">
+            <label>Fiscal Year *</label>
+            <select id="fiscalYear"></select>
+        </div>
 
-<!--    &lt;!&ndash; RIGHT: Metadata &ndash;&gt;-->
-<!--    <div class="card metadata-card">-->
-<!--        <h3>Engagement Details</h3>-->
+        <div class="form-group">
+            <button type="button" id="uploadBtn"  class="primary animation-loader-wrapper" disabled="true">Upload</button>
+        </div>
 
-<!--        <div class="form-group">-->
-<!--            <label>Company Name *</label>-->
-<!--            <input type="text" placeholder="e.g. ABC Holdings N.V." id="companyName">-->
-<!--        </div>-->
+        <div class="form-group">
+            <span class="error hidden" id="errorMessage">No Errors</span>
+        </div>
+    </div>
 
-<!--        <div class="form-group">-->
-<!--            <label>Fiscal Year *</label>-->
-<!--            <select id="fiscalYear">-->
-<!--                <option value="">Select year</option>-->
-<!--                <option>2025</option>-->
-<!--                <option>2024</option>-->
-<!--                <option>2023</option>-->
-<!--            </select>-->
-<!--        </div>-->
+    <!-- DATA PREVIEW -->
+    <div class="card data-preview">
+        <div class="preview-header">
+            <h3>Data Preview</h3>
+            <span class="status-badge status-uploaded" id="previewStatus">
+                No file uploaded
+            </span>
+        </div>
 
-<!--        <div class="form-hint">-->
-<!--            This information will be used throughout your audit documentation.-->
-<!--        </div>-->
-<!--    </div>-->
+        <div class="table-wrapper">
+            <!-- add/remove "is-empty" dynamically -->
+            <table class="app-table is-empty">
+                <thead>
+                    <tr>
+                        <th>Column A</th>
+                        <th>Column B</th>
+                        <th>Column C</th>
+                    </tr>
+                </thead>
 
-<!--</div>-->
+                <tbody>
+                    <!-- EMPTY STATE -->
+                    <tr class="empty-row">
+                        <td colspan="100%">
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <div class="empty-icon">
+                                        <svg viewBox="0 0 48 48" width="36" height="36" fill="none">
+                                            <rect x="6" y="10" width="36" height="28" rx="6"
+                                                  stroke="currentColor" stroke-width="1.5"/>
+                                            <line x1="6" y1="18" x2="42" y2="18"
+                                                  stroke="currentColor" stroke-width="1.5"/>
 
-<!--&lt;!&ndash; DATA PREVIEW &ndash;&gt;-->
-<!--<div class="card data-preview">-->
-<!--    <div class="preview-header">-->
-<!--        <h3>Data Preview</h3>-->
-<!--        <span class="status-badge status-uploaded" id="previewStatus">No file uploaded</span>-->
-<!--    </div>-->
+                                            <line x1="16" y1="28" x2="32" y2="28"
+                                                  stroke="currentColor" stroke-width="1.5"
+                                                  stroke-linecap="round" opacity="0.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="empty-title">No data available</div>
+                                <div class="empty-subtitle">
+                                    Upload a file to preview your dataset here
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
 
-<!--    <div class="table-wrapper">-->
-<!--        <table class="app-table">-->
-<!--            <thead>-->
-<!--                <tr>-->
-<!--                    <th>Column 1</th>-->
-<!--                    <th>Column 2</th>-->
-<!--                    <th>Column 3</th>-->
-<!--                </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--                <tr class="empty-row">-->
-<!--                    <td colspan="3">Upload a file to preview data</td>-->
-<!--                </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
+                    <!-- EXAMPLE DATA ROWS (remove is-empty class when using these) -->
+<!--                    <tr>-->
+<!--                        <td>Value 1</td>-->
+<!--                        <td>Value 2</td>-->
+<!--                        <td>Value 3</td>-->
+<!--                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-<!--&lt;!&ndash; ACTION BAR &ndash;&gt;-->
-<!--<div class="action-bar">-->
-<!--    <button class="secondary-btn">Cancel</button>-->
-<!--    <button class="primary-btn" id="nextBtn" disabled>Next → Column Mapping</button>-->
-<!--</div>-->
-
+{% block scripts %}
+<script src="/static/scripts/app/upload.js"></script>
 {% endblock %}

@@ -12,7 +12,7 @@ router = APIRouter()
 
 
 @router.post("/csv")
-@limiter.limit("5/minute")
+# @limiter.limit("5/minute")
 async def upload_csv(
     request: Request,
     company_name: str = Form(...),

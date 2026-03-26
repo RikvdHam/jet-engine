@@ -60,6 +60,12 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
 /* Top Bar */
 .topbar {
     position: fixed;
@@ -282,11 +288,11 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px;
 }
 
 .step-indicator {
     font-size: 13px;
+    line-height: 13px;
     font-weight: 600;
     color: var(--secondary);
     padding: 6px 12px;
@@ -296,12 +302,13 @@ button {
 
 .main {
     margin-left: 230px;
-    padding: 86px 24px 24px 24px;
+    padding: 86px 20px 20px 20px;
     width: calc(100% - 230px);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     transition: all 0.3s ease;
+    gap: 25px;
 }
 
 .sidebar.collapsed ~ .main {
@@ -317,11 +324,12 @@ button {
 
 .content {
     flex: 1;
+    max-height: calc(100% - 130.4px);
 }
 
 .card {
     position: relative;
-    background: var(--bg-subtle);
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 24px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -333,8 +341,8 @@ button {
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .card h3 {
@@ -342,30 +350,15 @@ button {
 }
 
 .status-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 96px;
-    padding: 6px 14px;
-
-    border-radius: 999px;
-    font-size: 12px;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
     font-weight: 600;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
+    transition: all 0.15s ease;
+}
 
-    background: rgba(0, 0, 0, 0.04);
-    border: 1px solid transparent;
-
-    box-shadow:
-        0 1px 2px rgba(0,0,0,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.35);
-
-    backdrop-filter: blur(2px);
-
-    user-select: none;
-    white-space: nowrap;
+.status-badge.hidden {
+    visibility: hidden;
 }
 
 .status-uploaded {
@@ -374,38 +367,12 @@ button {
     border-color: rgba(26, 49, 71, 0.25);
 }
 
-.status-validating {
-    color: #4a6fa5;
-    background: rgba(147, 172, 198, 0.18);
-    border-color: rgba(147, 172, 198, 0.35);
-}
-
-.status-success {
-    color: #2f7d32;
-    background: rgba(92, 184, 92, 0.15);
-    border-color: rgba(92, 184, 92, 0.35);
-}
-
-.status-warning {
-    color: #9a6a1f;
-    background: rgba(240, 173, 78, 0.18);
-    border-color: rgba(240, 173, 78, 0.35);
-}
-
-.status-error {
-    color: #8a1f1f;
-    background: rgba(217, 83, 79, 0.18);
-    border-color: rgba(217, 83, 79, 0.35);
-}
-
 /* Footer actions */
 .actions {
     border-top: 1px solid var(--border);
-    padding-top: 16px;
-    margin-top: 16px;
-
     display: flex;
     justify-content: space-between;
+    padding-top: 20px;
 }
 
 .actions button {
@@ -416,33 +383,27 @@ button {
     transition: all 0.15s ease;
 }
 
-.actions button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none !important;
-}
-
 /* Primary (Continue) */
-.actions button.primary {
+button.primary {
     min-width: 140px;
     background: var(--primary);
     color: white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.actions button.primary:hover:not(:disabled) {
-    background: #16283a;
-    transform: translateY(-1px);
+button.primary:hover:not(:disabled) {
+    transform: translateY(-0.5px);
+    background: rgba(26, 49, 71, 0.8);
 }
 
 /* Secondary (Back) */
-.actions button.secondary {
+button.secondary {
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text-secondary);
 }
 
-.actions button.secondary:hover:not(:disabled) {
+button.secondary:hover:not(:disabled) {
     background: var(--bg-subtle);
     color: var(--text-primary);
 }
@@ -451,14 +412,18 @@ button {
    Base Table
 ================================ */
 .table-wrapper {
-    flex: 1 1 auto;
-    min-height: 0;              /* adjust as needed */
-    overflow-y: auto;
-    border-radius: 14px;
+    flex: 1;
+    overflow: auto;
+
+    min-height: 0; /* 🔑 prevents overflow bug */
+
+    width: 100%;
+    border-radius: 12px;
 }
 
 .table-wrapper::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
+    height: 4px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
@@ -472,12 +437,21 @@ button {
 
 .app-table {
     width: 100%;
-    table-layout: fixed;              /* 🔑 prevents column shifting */
+    table-layout: auto;              /* 🔑 prevents column shifting */
     border-collapse: separate;
     border-spacing: 0;
-    background: var(--bg-subtle);
+    border: 1px solid rgba(0,0,0,0.06);
+    background: var(--bg-card);
     border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+.app-table.is-empty tbody tr:hover {
+    background: transparent;
+}
+
+.app-table.is-empty tbody tr:hover td:first-child::before {
+    display: none;
 }
 
 /* ================================
@@ -485,31 +459,46 @@ button {
 ================================ */
 .app-table th,
 .app-table td {
-    padding: 14px 16px;
+    padding: 12px 14px;
     text-align: left;
-    border-bottom: 1px solid var(--thirdly);
+    border-bottom: 0.5px solid var(--bg-subtle);
     font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.app-table th:not(:last-child),
+.app-table td:not(:last-child) {
+    border-right: 0.5px solid var(--bg-subtle);
+}
+
 /* ================================
    Sticky Header
 ================================ */
 .app-table thead th {
+    cursor: default;
     position: sticky;
     top: 0;
     z-index: 10;
 
     backdrop-filter: blur(6px);
-    background: var(--bg-subtle);
-    box-shadow: inset 0 -1px 0 var(--thirdly);
+    background: linear-gradient(to bottom, var(--bg-subtle), rgba(0,0,0,0.02));
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    box-shadow: inset 0 -1px 0 var(--bg-subtle);
+
     color: var(--text-secondary);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+}
+
+.app-table thead th::after {
+    content: "↕";
+    font-size: 10px;
+    margin-left: 6px;
+    opacity: 0.3;
 }
 
 /* ================================
@@ -519,8 +508,12 @@ button {
     transition: background 0.2s ease;
 }
 
+.app-table tbody tr:nth-child(even) {
+    background: rgba(0,0,0,0.015);
+}
+
 .app-table tbody tr:hover {
-    background: rgba(26, 49, 71, 0.03);
+    background: rgba(0, 0, 0, 0.025);
 }
 
 /* ================================
@@ -551,6 +544,149 @@ button {
     color: var(--text-secondary);
     font-style: italic;
     padding: 24px;
+}
+
+.app-table .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.app-table .empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 10px;
+    background: var(--bg-subtle);
+
+    color: var(--text-secondary); /* SVG uses this */
+}
+
+.app-table .empty-title {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.app-table .empty-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: -5px;
+}
+
+
+/* ================================
+   Loading animation
+================================ */
+.animation-loader-wrapper {
+    line-height: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.animation-loader {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 2px solid white;
+    border-right: 2px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+
+.animation-loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border-bottom: 2px solid var(--text-secondary);
+    border-left: 2px solid transparent;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.checkmark-circle {
+    fill: none;
+    stroke: var(--bg-card);
+    stroke-width: 2;
+    stroke-dasharray: 157;
+    stroke-dashoffset: 157;
+    animation: stroke 0.4s ease forwards;
+}
+
+.checkmark-check {
+    fill: none;
+    stroke: var(--bg-card);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 36;
+    stroke-dashoffset: 36;
+    animation: stroke 0.3s 0.3s ease forwards;
+}
+
+@keyframes stroke {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.error-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.error-circle {
+    fill: none;
+    stroke: var(--bg-card);
+    stroke-width: 2;
+    stroke-dasharray: 157;
+    stroke-dashoffset: 157;
+    animation: error-stroke 0.4s ease forwards;
+}
+
+.error-cross {
+    fill: none;
+    stroke: var(--bg-card);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: error-stroke 0.3s 0.3s ease forwards;
+}
+
+@keyframes error-stroke {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* ================================

@@ -89,5 +89,6 @@ async def process_csv_upload(
         "dataset_id": dataset_id,
         "columns": columns,
         "preview": df.head(50).to_dicts(),
-        "suggested_mapping": suggested_mapping
+        "suggested_mapping": suggested_mapping,
+        "row_count": row_count
     }
