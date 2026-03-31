@@ -1,7 +1,7 @@
 from typing import List
 
 from sqlalchemy import (Column, String, DateTime, Integer, Text, JSON, func, 
-                        UniqueConstraint, ForeignKey, Index)
+                        UniqueConstraint, ForeignKey, Index, desc)
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.orm import relationship, Session
 
@@ -21,11 +21,11 @@ class User(Base):
                         server_default=func.now())
     last_login_at = Column(DateTime)
 
-    datasets = relationship("Dataset", back_populates="uploaded_by", 
+    datasets = relationship("DatasetORM", back_populates="uploaded_by",
                             cascade="all, delete-orphan")
 
 
-class Dataset(Base):
+class DatasetORM(Base):
     __tablename__ = "datasets"
 
     id = Column(String, primary_key=True)
@@ -34,8 +34,8 @@ class Dataset(Base):
     stored_filename = Column(String, nullable=False, unique=True)
     uploaded_by_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     uploaded_by = relationship("User", back_populates="datasets")
-    upload_at = Column(DateTime(timezone=True), nullable=False, 
-                       server_default=func.now())
+    uploaded_at = Column(DateTime(timezone=True), nullable=False,
+                         server_default=func.now())
     original_filename = Column(String, nullable=False)
     signature = Column(Text, nullable=False)
     row_count = Column(Integer, nullable=False)
@@ -50,7 +50,16 @@ class Dataset(Base):
 
     @staticmethod
     def load(db: Session, dataset_id: str):
-        return db.query(Dataset).filter(Dataset.id == dataset_id).first()
+        return db.query(DatasetORM).filter(DatasetORM.id == dataset_id).first()
+
+    @staticmethod
+    def load_latest_for_user(db: Session, user_id: int):
+        return (
+            db.query(DatasetORM)
+            .filter(DatasetORM.uploaded_by_id == user_id)
+            .order_by(desc(DatasetORM.last_accessed_at))
+            .first()
+        )
 
 
 # class Field(Base):
@@ -146,7 +155,7 @@ class ViewORM(Base):
     last_accessed_at = Column(DateTime(timezone=True), nullable=False, 
                               server_default=func.now())
 
-    dataset = relationship("Dataset", back_populates="views")
+    dataset = relationship("DatasetORM", back_populates="views")
 
     __table_args__ = (
         # Prevent duplicate logical views

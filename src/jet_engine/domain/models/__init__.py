@@ -6,6 +6,7 @@ from .pagination import Pagination
 from .sorting import Sorting
 from .view import View
 from .query import Query
+from .dataset import Dataset
 
 __all__ = [
     "Dimension",
@@ -18,5 +19,6 @@ __all__ = [
     "View",
     "FilterNode",
     "FilterCondition",
-    "Query"
+    "Query",
+    "Dataset"
 ]

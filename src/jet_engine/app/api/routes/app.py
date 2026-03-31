@@ -23,3 +23,14 @@ async def upload(request: Request):
             "active_page": "upload"
          }
     )
+
+
+@router.get("/column-mapping", response_class=HTMLResponse)
+async def column_mapping(request: Request):
+    return templates.TemplateResponse(
+        "mapping.html",
+        {
+            "request": request,
+            "active_page": "column-mapping"
+         }
+    )

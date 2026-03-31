@@ -2,14 +2,91 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/mapping.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/mapping.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/mapping.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/uploads.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/1d8e4d19-4802-4c8d-839f-2bac286a975b.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/2ad6f56f-d869-438d-8596-31ae76111a21.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/2f90a7ff-d2da-4c71-b66c-6e500ee5ea6a.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/3c468363-71e7-44b7-91ba-d80fed081626.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/5c33bc17-1dbb-4201-b301-fc3d981687f6.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/6f07a510-07d9-4ab0-86c4-8408bbc31bc2.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/78db0151-6b4e-4e98-b4e9-96a50bc89116.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/81b144eb-ad91-491a-a25e-ec0f43464ec4.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/86c9b077-2df0-4eea-b67e-6d4242e2fe29.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/908e65f3-12d8-449f-9550-43ac5ffd078a.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/9e3e5f9c-b92f-4be3-82a7-190b0eef5534.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/a78e0fa8-6ffb-4ba8-b131-9c62f73d0f79.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/bf1c0b7e-2f7f-4674-8e0f-74f83f51a491.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/d6bdf6be-9162-438f-9180-d63e47e2f589.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/raw/f79209a9-2197-4072-9191-38b67bb98ecb.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/08e654c4-969a-4252-aac0-4985bea4859e.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/0ec88be8-ec1b-48c7-bfa7-98c4c18d6aee.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/1760d941-356f-4ba0-ad0e-d14d3d01c943.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/19b37c0c-1c3e-4861-931a-f822d38e0449.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/1e20c284-f48a-4c47-b9d3-56adfdb12301.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/2475ead3-26b4-433e-96af-2a4ba24ee680.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/32964abc-41fd-4882-b383-0cb4c01ef013.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/344299f0-16e0-48a9-beb4-57cfb099ac36.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/3496ecbe-cb89-4044-ad50-531868ac1c7b.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/35819d15-5901-4298-a363-ad2c2896b85d.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/3c20cfd2-09a8-4f37-b21a-afb5b7ccd3a9.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/404c2da3-404f-49ab-9f3c-7d284e3140f8.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/414a8352-ca48-4380-bf08-5c1c9fbb55ed.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/47870e09-9d46-4fea-8a2c-c0bd643cf0d1.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/4952ed9d-a0fe-4971-b919-a53d25bd3359.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/4b53848b-b335-4476-be26-c2f10551d8ae.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/5270f030-64e8-4243-b19d-c8ed10dfc745.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/54a783b0-9502-48b0-8972-49038f74e36c.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/56ba7f61-464c-4d60-9c68-11c15de187ea.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/58223895-d6ac-4baa-986f-aa1bd2179dc8.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/607d7f78-590f-47d7-9253-dd2201af0bfe.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/6982590b-c057-49aa-9e04-0a5c88af7098.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/6ea35475-bdcb-4a68-9e33-5ca1d17dc5db.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/702bd148-9735-4abf-88e2-cb39d68f3e4e.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/7c33765e-49ee-4c8e-8ea3-1ffc26571168.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/8ce49d53-cd7f-4ee4-8474-51c7147a0f40.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/8e117178-9eb6-4960-8439-04755c6b0663.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/9279534c-d39e-48d2-90be-efb506af6559.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/937fa4d4-8e2c-45c7-a1a8-06a170f510a4.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/966f099a-56d0-4b7e-9954-5433ccca6963.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/9a0dbfb5-0748-435b-a7f5-c7496c2ab51a.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/a38f651b-8bf2-4e6d-9469-c3ff750badf1.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/a5cd4318-d696-4daf-a5ac-48a2ce5a171d.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/ab835dd8-cf95-4977-a444-deba16966b57.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/b08948f7-46df-4a09-8e0b-305814bd8421.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/b790e1c5-e63c-41f9-aa63-16f095dc5f59.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/bbb39b53-ed7d-486f-a825-16144c93031d.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/bd11baa1-ad0a-4096-86bd-8ac86937efdd.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/c1567809-07be-49fc-aaca-a2b173285007.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/c74e859f-befa-4ea0-8c04-22cc230f9b9f.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/c91bf72b-b33c-4e43-95d1-9e1641a5fb26.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/d19ebd52-0858-4ca1-848c-bc109f820fa3.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/e65b7402-65fb-4bdb-9164-2a1dc07e00f9.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/e95d7606-170f-4087-bf96-49007543d0e7.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/eee219ff-8f3b-450f-8cfc-fa57eaa74656.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/f0ef1302-a2b9-4b55-a6ce-f7b9ef1059c2.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/f6e1266a-a05d-4002-a11c-d70a9704ab0b.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/f73b7c3e-c925-4840-b9f2-13d0bb964f31.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/fa71d7f1-a2b1-4d87-8a19-e0b8edfb4610.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/storage/transformed/fefdaddd-4899-4352-8b76-5f8e24467f53.parquet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/meta.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/meta.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_query_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_transforming_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_validation_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/dataset_validation_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/upload.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/styles/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/styles/upload.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/upload.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/templates/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/upload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/domain/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/db/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/infra/storage/static/fields.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/infra/storage/static/fields.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_validation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +96,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -41,6 +119,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -58,6 +137,34 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rik\Websites\PyCharmProjects\jet_engine\jet_engine\src\jet_engine\app\static\styles" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="datasets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="jet_engine" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/jet_engine/app/api/routes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.datasets" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

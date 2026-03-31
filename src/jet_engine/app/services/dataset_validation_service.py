@@ -6,7 +6,7 @@ import polars as pl
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
-from jet_engine.infra.db.models import Dataset, DatasetMapping
+from jet_engine.infra.db.models import DatasetORM, DatasetMapping
 from jet_engine.infra.core.config import settings
 from jet_engine.domain.models import Field
 from jet_engine.infra.core import field_registry
@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def validate_dataset(db: Session, dataset_id: str) -> Dict:
-    dataset = Dataset.load(db, dataset_id)
+    dataset = DatasetORM.load(db, dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 

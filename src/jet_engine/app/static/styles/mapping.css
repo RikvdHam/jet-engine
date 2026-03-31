@@ -1,0 +1,341 @@
+/* Layout */
+.grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 20px;
+}
+
+
+/* Header */
+.mapping-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.focus-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    cursor: pointer;
+}
+
+/* Table */
+.table-scroll {
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.mapping-table {
+    border-collapse: collapse;
+    min-width: 600px;
+    width: 100%;
+    font-size: 13px;
+}
+
+.mapping-table th,
+.mapping-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    text-align: left;
+}
+
+/* Sticky first column */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 2;
+    font-weight: 500;
+}
+
+/* Header */
+.mapping-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    position: relative;
+    cursor: grab;
+}
+
+/* Column hover */
+.mapping-table th:hover {
+    background: #f3f4f6;
+}
+
+/* Column content */
+.col-name {
+    display: block;
+}
+
+.type-icon {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.fields-container {
+    overflow: auto;
+    padding: 20px 20px 0 0;
+}
+
+/* Field */
+.mapping-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mapping-field:hover {
+    border-color: #c7d2fe;
+    background: #fafcff;
+}
+
+/* MANDATORY emphasis */
+.mapping-field.mandatory {
+    border-left: 3px solid var(--text-secondary);
+}
+
+.mapping-field.mapped{
+    border: 2px solid #27ae60;
+    background: #f4fbf6;
+    transition: all 0.2s ease;
+}
+
+.field-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* GROUP */
+.field-group {
+    margin-bottom: 18px;
+}
+
+.group-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* FIELD */
+.mapping-field {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+/* FIELD META */
+.field-meta {
+    display: flex;
+    display-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+/* FIELD META */
+.field-meta-sm {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* FIELD NAME */
+.field-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* BADGES */
+.required-badge {
+    font-size: 10px;
+    background: var(--text-secondary);
+    color: var(--bg-card);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.optional-badge {
+    font-size: 10px;
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* DROP ZONE */
+.drop-zone {
+    border: 1px dashed #d1d5db;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+    background: #fafafa;
+}
+
+.drop-zone:hover {
+    border-color: #2563eb;
+    background: #f0f7ff;
+}
+
+.mapping-field.mapped .drop-zone{
+    border-color: #27ae60;
+    background: #f4fbf6;
+}
+
+.drop-wrapper {
+    position: relative;
+}
+
+.mapped-check {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 14px;
+    line-height: 14px;
+    color: #27ae60;
+}
+
+.remove-mapping {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 14px;
+    color: #888;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.remove-mapping:hover {
+    color: #e74c3c;
+}
+
+.mapping-field.mapped .remove-mapping {
+    opacity: 1;
+}
+
+
+.dtype-icon-box {
+    width: 32px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: var(--bg-subtle);
+
+    flex-shrink: 0;
+}
+
+/* SVG itself */
+.dtype-icon-box svg {
+    width: 18px;
+    height: 18px;
+
+    color: var(--primary);
+    fill: currentColor;
+}
+
+/* Text inside SVG */
+.dtype-icon-box text {
+    font-size: 10px;
+    font-weight: 600;
+    fill: currentColor;
+}
+
+/* Next button */
+.next-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.next-btn:not(:disabled) {
+    opacity: 1;
+}
+
+#uploadMsg {
+    visibility: visible;
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+    transition: all 0.25s ease;
+}
+
+#uploadMsg.success {
+    color: #27ae60;
+}
+
+#uploadMsg.error {
+    color: #A66;
+}
+
+#uploadMsg.hidden {
+    visibility: hidden;
+}
+
+/* Header layout for mapping */
+.column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* Make headers draggable-looking */
+.mapping-table th,
+.mapping-table td {
+    transition: opacity 0.2s ease;
+}
+
+.mapping-table th.dimmed {
+    opacity: 0.35;
+    transition: opacity 0.2s ease;
+}
+
+.mapping-table th {
+    cursor: grab;
+}
+
+.mapping-table th:active {
+    cursor: grabbing;
+}
+
+/* Sticky first column (like Excel) */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background: var(--bg-card);
+    z-index: 11;
+}
+
+/* Optional: subtle highlight when dragging */
+.mapping-table th.dragging {
+    opacity: 0.5;
+}
+
+.mapping-progress {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+

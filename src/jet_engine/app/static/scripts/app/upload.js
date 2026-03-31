@@ -11,6 +11,9 @@ const errorMsg = document.getElementById("errorMessage");
 
 populateFiscalYears()
 
+continueBtn.addEventListener("click", () => {
+    window.location.href = "/app/column-mapping";
+});
 
 // Enable button if all conditions are met
 function updateUploadButtonState() {
@@ -145,37 +148,10 @@ function showUploadError(message) {
 }
 
 document.getElementById("uploadBtn").onclick = () => {
-    handleFile2(selectedFile);
+    handleFile(selectedFile);
 };
 
-
-function handleFile(file) {
-    if (!file) return;
-
-    enableUploadingVisuals()
-
-    // Simulate progress
-    progressSection.style.display = "block";
-    progressFill.style.width = "0%";
-    fileInfo.textContent = `Uploading ${file.name}...`;
-
-    let progress = 0;
-    const timeInMS = 0.0001 * file.size;
-    const interval = setInterval(() => {
-        progress = Math.min(progress + (100 / timeInMS), 90);
-        progressFill.style.width = progress + "%";
-
-        if (progress >= 100) {
-            clearInterval(interval);
-
-//            showUploadSuccess(file.name, 1327941)
-
-            showUploadError("Test error message.")
-        }
-    }, 100);
-}
-
-async function handleFile2(file) {
+async function handleFile(file) {
     if (!file) return;
 
     enableUploadingVisuals()

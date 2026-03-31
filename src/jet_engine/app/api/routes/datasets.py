@@ -13,20 +13,28 @@ from sqlalchemy.orm import Session
 from jet_engine.infra.core.limiter import limiter
 from jet_engine.infra.core.config import settings
 from jet_engine.infra.db.session import get_db, get_current_user_id
-from jet_engine.infra.db.models import Dataset, DatasetMapping, SignatureMapping
+from jet_engine.infra.db.models import DatasetMapping, SignatureMapping
 from jet_engine.app.services.dataset_query_service import get_raw_dataset_page, execute_query
 from jet_engine.app.services.dataset_validation_service import validate_dataset
 from jet_engine.app.services.dataset_transforming_service import transform_dataset
 from jet_engine.app.services.mapping_service import validate_map, save_map
+from jet_engine.app.services.dataset_service import get_latest_dataset
 from jet_engine.domain.request_models import ViewRequest, MappingRequest
-from jet_engine.domain.models import View
-from jet_engine.domain.models import Field
+from jet_engine.domain.models import View, Field, Dataset
 from jet_engine.infra.core import QueryBuilder
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 router = APIRouter()
+
+
+@router.get("/session/latest")
+async def get_session_dataset(
+    db: Session = Depends(get_db),
+    current_user_id: int = Depends(get_current_user_id)
+):
+    return await get_latest_dataset(db, current_user_id)
 
 
 @router.get("/{dataset_id}/data")

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
-from jet_engine.infra.db.models import Dataset, DatasetMapping, SignatureMapping
+from jet_engine.infra.db.models import DatasetORM, DatasetMapping, SignatureMapping
 from jet_engine.infra.core import field_registry
 
 
@@ -61,8 +61,8 @@ async def validate_map(mapping: dict) -> None:
             status_code=400,
             detail=(
                 "Invalid debit/credit mapping. You must map either "
-                "both 'debit_amount' & 'credit_amount' OR "
-                "'amount' & 'debit_credit_indicator'."
+                "both 'Debit Amount' & 'Credit Amount' OR "
+                "'Amount' & 'Debit / Credit Indicator'."
             )
         )
 
@@ -74,11 +74,9 @@ async def validate_map(mapping: dict) -> None:
         )
 
 
-async def save_map(dataset_id: str,
-                       mapping: dict,  # raw_column -> field_id
-                       db: Session) -> None:
+async def save_map(dataset_id: str, mapping: dict, db: Session) -> None:
 
-    dataset = Dataset.load(db, dataset_id)
+    dataset = DatasetORM.load(db, dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 

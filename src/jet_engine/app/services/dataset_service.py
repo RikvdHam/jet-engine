@@ -2,12 +2,16 @@ import os
 import uuid
 import hashlib
 import polars as pl
-from typing import Dict
+from typing import Dict, Optional
 from pathlib import Path
 from fastapi import HTTPException
 
 from jet_engine.infra.core.config import settings
-from jet_engine.infra.db.models import Dataset, SignatureMapping
+from jet_engine.infra.db.models import DatasetORM, SignatureMapping
+from jet_engine.domain.models import Dataset
+
+
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 
 # --------- Helper functions ---------
@@ -17,6 +21,14 @@ def compute_file_hash(file_path: str) -> str:
         for chunk in iter(lambda: f.read(1024*1024), b""):
             sha256.update(chunk)
     return sha256.hexdigest()
+
+
+async def get_latest_dataset(db, user_id) -> Optional[Dataset]:
+    dataset_orm = DatasetORM.load_latest_for_user(db, user_id)
+    if not dataset_orm:
+        return None
+
+    return Dataset.model_validate(dataset_orm)
 
 
 async def process_csv_upload(
@@ -31,11 +43,14 @@ async def process_csv_upload(
     file_name = f"{dataset_id}.csv"
     file_name_parquet = f"{dataset_id}.parquet"
 
-    tmp_file_path = Path(settings.storage_tmp_dir) / file_name
-    raw_file_path = Path(settings.storage_raw_dir) / file_name_parquet
+    tmp_file_path = (BASE_DIR / settings.storage_tmp_dir / file_name).resolve()
+    raw_file_path = (BASE_DIR / settings.storage_raw_dir / file_name_parquet).resolve()
 
     tmp_file_path.parent.mkdir(parents=True, exist_ok=True)
     raw_file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    print("TMP ABS:", tmp_file_path.resolve())
+    print("RAW ABS:", raw_file_path.resolve())
 
     # ---------- 1. Stream to disk temporarily ----------
     with open(tmp_file_path, "wb") as f:
@@ -61,7 +76,7 @@ async def process_csv_upload(
 
     # ---------- 4. Save Dataset metadata ----------
     try:
-        dataset = Dataset(
+        dataset = DatasetORM(
             id=dataset_id,
             company_name=company_name,
             fiscal_year=fiscal_year,

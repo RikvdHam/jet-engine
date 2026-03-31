@@ -421,17 +421,19 @@ button.secondary:hover:not(:disabled) {
     border-radius: 12px;
 }
 
-.table-wrapper::-webkit-scrollbar {
+
+::-webkit-scrollbar {
     width: 4px;
     height: 4px;
 }
 
-.table-wrapper::-webkit-scrollbar-thumb {
+
+::-webkit-scrollbar-thumb {
     background: var(--primary);
     border-radius: 4px;
 }
 
-.table-wrapper::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: #f0f0f0;
 }
 
@@ -494,12 +496,14 @@ button.secondary:hover:not(:disabled) {
     text-transform: uppercase;
 }
 
-.app-table thead th::after {
-    content: "↕";
-    font-size: 10px;
-    margin-left: 6px;
-    opacity: 0.3;
+.app-table thead th span {
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
+
 
 /* ================================
    Table Body
@@ -530,7 +534,7 @@ button.secondary:hover:not(:disabled) {
     left: 8px;
     top: 50%;
     transform: translateY(-50%);
-    width: 4px;
+    width: 3px;
     height: 60%;
     border-radius: 2px;
     background: var(--primary);

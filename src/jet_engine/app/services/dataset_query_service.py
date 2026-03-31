@@ -10,14 +10,36 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from fastapi.responses import StreamingResponse
 
-from jet_engine.infra.db.models import Dataset, ViewORM
+from jet_engine.infra.db.models import DatasetORM, ViewORM
 from jet_engine.infra.core import QueryBuilder
 from jet_engine.infra.core.config import settings
 from jet_engine.domain.models import View
 from jet_engine.domain.request_models import ViewRequest
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parents[2]
+
+
+def map_dtype(dtype_str: str) -> str:
+    """
+    Map backend / Pandas / DuckDB dtype string to a frontend-friendly type.
+    """
+    dtype_str = dtype_str.lower()
+
+    if dtype_str in ("str", "string", "object", "varchar"):
+        return "str"
+    elif dtype_str in ("int", "integer", "bigint", "int64"):
+        return "integer"
+    elif dtype_str in ("float", "double", "float64", "decimal"):
+        return "float"
+    elif "date" in dtype_str:
+        return "date"
+    elif "time" in dtype_str:
+        return "datetime"
+    elif dtype_str in ("bool", "boolean"):
+        return "boolean"
+    else:
+        return "unknown"
 
 
 def get_raw_dataset_page(
@@ -26,7 +48,7 @@ def get_raw_dataset_page(
     offset: int,
     limit: int,
 ):
-    dataset = Dataset.load(db, dataset_id)
+    dataset = DatasetORM.load(db, dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
@@ -34,21 +56,25 @@ def get_raw_dataset_page(
     if not parquet_path.exists():
         raise HTTPException(status_code=404, detail="Parquet file not found")
 
-    query = f"""
-            SELECT *
-            FROM read_parquet('{parquet_path}')
-            LIMIT {limit}
-            OFFSET {offset}
-        """
+    # Read parquet file
+    rel = duckdb.read_parquet(str(parquet_path)).limit(limit, offset=offset)
 
-    result = duckdb.query(query).to_df()
+    df = rel.to_df()
+
+    # Extract column metadata
+    columns = []
+    for col, dtype in zip(df.columns, df.dtypes):
+        columns.append({
+            "name": col,
+            "dtype": map_dtype(str(dtype))
+        })
 
     return {
         "offset": offset,
         "limit": limit,
         "row_count": dataset.row_count,
-        "columns": list(result.columns),
-        "data": result.to_dict(orient="records"),
+        "columns": columns,
+        "data": df.to_dict(orient="records"),
         "has_next": offset + limit < dataset.row_count
     }
 

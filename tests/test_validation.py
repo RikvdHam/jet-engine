@@ -4,6 +4,9 @@ from pathlib import Path
 from jet_engine.infra.core.config import settings
 
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+
+
 def test_validate_happy_path(client, uploaded_dataset, journal_mapping):
     dataset_id = uploaded_dataset["dataset_id"]
 
@@ -21,7 +24,7 @@ def test_validate_happy_path(client, uploaded_dataset, journal_mapping):
     assert data["invalid_rows"] == 0  # everything valid in a correct CSV
 
     # Check validated Parquet file exists
-    validated_path = Path(settings.storage_validated_dir) / f"{dataset_id}.parquet"
+    validated_path = BASE_DIR / settings.storage_validated_dir / f"{dataset_id}.parquet"
     assert validated_path.exists()
 
 

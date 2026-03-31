@@ -6,7 +6,7 @@ import polars as pl
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
-from jet_engine.infra.db.models import ViewORM, User, Dataset
+from jet_engine.infra.db.models import ViewORM, User, DatasetORM
 from jet_engine.infra.core.config import settings
 from jet_engine.app.services.dataset_query_service import create_initial_view
 
@@ -162,7 +162,7 @@ def enrich_with_helper_columns(lf: pl.LazyFrame) -> pl.LazyFrame:
 
 def transform_dataset(db: Session, dataset_id: str, current_user_id: int) -> ViewORM: #TODO: Is it?
     # --- 1. Check is dataset exists
-    dataset = Dataset.load(db, dataset_id)
+    dataset = DatasetORM.load(db, dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail="Dataset not found")
 
@@ -187,7 +187,7 @@ def transform_dataset(db: Session, dataset_id: str, current_user_id: int) -> Vie
     lf = enrich_with_helper_columns(lf)
 
     view = create_initial_view(db, dataset_id, current_user_id)
-    file_path = Path(settings.storage_transformed_dir) / f"{dataset_id}.parquet"
+    file_path = BASE_DIR / settings.storage_transformed_dir / f"{dataset_id}.parquet"
 
     # Ensure parent directory exists
     file_path.parent.mkdir(parents=True, exist_ok=True)

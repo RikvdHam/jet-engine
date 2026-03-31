@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/styles/mapping.css">
+{% endblock %}
+
+{% block title %}Upload Data{% endblock %}
+{% block pageTitle %}
+Step 2 — Mapping Columns
+{% endblock %}
+{% block stepNumber %}2{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+    <!-- LEFT: Data Preview -->
+    <div class="mapping-left card">
+        <div class="mapping-header">
+            <h3>Data Preview</h3>
+            <button class="focus-btn">Focus: All</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="app-table mapping-table">
+                <thead>
+                    <tr></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mapping-right card">
+
+        <div class="mapping-header">
+            <h3>Map Required Fields</h3>
+            <div class="mapping-progress">0/0</div>
+        </div>
+
+        <div class="fields-container"></div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/scripts/app/mapping.js"></script>
+{% endblock %}
