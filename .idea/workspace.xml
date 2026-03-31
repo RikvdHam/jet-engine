@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b279b88-6e8c-495d-8814-f6bd56b5fc52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/static/styles/validate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/validate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/datasets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/services/mapping_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/mapping.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/static/scripts/app/mapping.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jet_engine/app/api/routes/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/jet_engine/app/api/routes/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>

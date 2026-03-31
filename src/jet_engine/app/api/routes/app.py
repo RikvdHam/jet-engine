@@ -34,3 +34,14 @@ async def column_mapping(request: Request):
             "active_page": "column-mapping"
          }
     )
+
+
+@router.get("/validate", response_class=HTMLResponse)
+async def validate(request: Request):
+    return templates.TemplateResponse(
+        "validate.html",
+        {
+            "request": request,
+            "active_page": "validate"
+         }
+    )
