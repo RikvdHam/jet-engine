@@ -1,3 +1,5 @@
+from typing import Dict
+
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
@@ -93,3 +95,19 @@ async def save_map(dataset_id: str, mapping: dict, db: Session) -> None:
         db.add(SignatureMapping(signature=dataset.signature, mapping_json=mapping))
 
     db.commit()
+
+
+async def fetch_suggested_mapping(db: Session, dataset_id: str) -> Dict:
+    dataset = DatasetORM.load(db, dataset_id)
+    if not dataset:
+        raise HTTPException(status_code=404, detail="Dataset not found")
+
+    signature = dataset.signature
+    if not signature:
+        raise HTTPException(status_code=404, detail="Empty signature for dataset")
+
+    signature_mapping = SignatureMapping.load_mapping(db, dataset.signature)
+    if not signature_mapping:
+        return {}
+
+    return signature_mapping.mapping_json

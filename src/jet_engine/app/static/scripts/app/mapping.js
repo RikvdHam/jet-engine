@@ -5,27 +5,47 @@ const appState = {
 };
 
 const continueBtn = document.getElementById("continueBtn");
+continueBtn.addEventListener("click", () => {
+    window.location.href = "/app/validate";
+});
 
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const datasetMeta = await loadDatasetMeta();
-
         appState.datasetId = datasetMeta.id;
 
         await loadTable();
-        await loadFields();
+        appState.fieldsMeta = await loadFields();
 
         initDragAndDrop();
         buildLoadBtnLogic();
-        updateMappingProgress();
+        bindFocusButton();
 
+        await applySuggestedMapping();
+
+        updateMappingProgress();
+        initUploadVisuals();
     } catch (err) {
         console.error("Initialization failed:", err);
     }
 });
 
+function bindFocusButton() {
+    const focusBtn = document.querySelector(".focus-btn");
 
+    focusBtn.addEventListener("click", () => {
+        if (focusMode === "all") {
+            focusMode = "unmapped";
+            focusBtn.textContent = "Focus: Unmapped";
+        } else {
+            focusMode = "all";
+            focusBtn.textContent = "Focus: All";
+        }
+
+        applyColumnFocus();
+    });
+}
 const backBtn = document.getElementById("backBtn");
 backBtn.addEventListener("click", () => {
     window.location.href = "/app/upload";
@@ -35,10 +55,9 @@ async function loadFields() {
     const response = await fetch("/api/meta/fields");
     const fields = await response.json();
 
-    window.fieldsMeta = fields; // Store globally
-
     const container = document.querySelector(".fields-container");
     container.innerHTML = "";
+
 
     // Define group order
     const groupOrder = [
@@ -103,6 +122,8 @@ async function loadFields() {
     msgSpan.textContent = "No message";
 
     container.appendChild(msgSpan);
+
+    return fields
 }
 
 function createField(field) {
@@ -229,6 +250,60 @@ async function loadDatasetMeta() {
 }
 
 
+function buildFieldIdMap(fieldsMeta) {
+    const map = {};
+    fieldsMeta.forEach(f => {
+        map[f.id] = f;
+    });
+    return map;
+}
+
+async function applySuggestedMapping() {
+    const response = await fetch(`/api/datasets/${appState.datasetId}/suggested-mapping`);
+    const suggested = await response.json();
+    console.log(suggested);
+
+    if (!Object.keys(suggested).length) {
+        return;
+    }
+
+    const fieldIdMap = buildFieldIdMap(appState.fieldsMeta);
+    console.log(fieldIdMap);
+
+    Object.entries(suggested).forEach(([columnName, fieldId]) => {
+        const field = fieldIdMap[fieldId];
+        if (!field) return;
+
+        const fieldEl = document.querySelector(
+            `[data-canonical-name="${field.canonical_name}"]`
+        );
+        if (!fieldEl) return;
+
+        const header = document.querySelector(
+            `th[data-column-name="${columnName}"]`
+        );
+        if (!header) return;
+
+        const columnType = header.dataset.dtype;
+
+        applyMapping(fieldEl, columnName);
+    });
+
+    validateMapping();
+    updateMappingProgress();
+    applyColumnFocus();
+}
+
+function applyMapping(fieldEl, columnName) {
+    const fieldName = fieldEl.dataset.canonicalName;
+
+    removeExistingMapping(columnName);
+
+    appState.mappingState[fieldName] = columnName;
+
+    updateFieldUI(fieldEl, columnName);
+}
+
 async function loadTable() {
     const response = await fetch(`/api/datasets/${appState.datasetId}/data?limit=50&offset=0`);
     if (!response.ok) {
@@ -306,8 +381,6 @@ async function loadTable() {
     });
 }
 
-const mappingState = {};
-
 function enableColumnDrag() {
     const headers = document.querySelectorAll(".mapping-table th[draggable='true']");
 
@@ -355,40 +428,25 @@ function enableFieldDrop() {
 function removeMapping(fieldEl) {
     const fieldName = fieldEl.dataset.canonicalName;
 
-    // Remove from state
-    delete mappingState[fieldName];
+    delete appState.mappingState[fieldName];
 
-    // Reset UI
     resetFieldUI(fieldEl);
 
-    // Revalidate
     validateMapping();
-
-    // Reset upload visuals
+    applyColumnFocus();
+    updateMappingProgress();
     resetUploadVisuals();
 }
 
+
 function handleDrop(fieldEl, columnName, columnDtype) {
-    const fieldName = fieldEl.dataset.canonicalName;
     const fieldDtype = fieldEl.dataset.dtype;
 
-//    // ✅ 1. Validate dtype compatibility
-//    if (!isCompatible(fieldDtype, columnDtype)) {
-//        showError(`Incompatible types: ${columnDtype} → ${fieldDtype}`);
-//        return;
-//    }
+    applyMapping(fieldEl, columnName);
 
-    // 2. Prevent duplicate mapping
-    removeExistingMapping(columnName);
-
-    // 3. Save mapping
-    mappingState[fieldName] = columnName;
-
-    // 4. Update UI
-    updateFieldUI(fieldEl, columnName);
-
-    // 5. Validate form
     validateMapping();
+    updateMappingProgress();
+    applyColumnFocus();
 }
 
 function isCompatible(fieldType, columnType) {
@@ -402,11 +460,10 @@ function isCompatible(fieldType, columnType) {
 }
 
 function removeExistingMapping(columnName) {
-    for (const key in mappingState) {
-        if (mappingState[key] === columnName) {
-            delete mappingState[key];
+    for (const key in appState.mappingState) {
+        if (appState.mappingState[key] === columnName) {
+            delete appState.mappingState[key];
 
-            // Reset UI for that field
             const field = document.querySelector(`[data-canonical-name="${key}"]`);
             resetFieldUI(field);
         }
@@ -455,7 +512,7 @@ function validateMapping() {
 
     requiredFields.forEach(field => {
         const key = field.dataset.canonicalName;
-        if (!mappingState[key]) {
+        if (!appState.mappingState[key]) {
             allMapped = false;
         }
     });
@@ -463,11 +520,13 @@ function validateMapping() {
     nextBtn.disabled = !allMapped;
 }
 
-function buildMappingPayload(fieldsMeta) {
+function buildMappingPayload() {
     const mapping = {};
 
-    Object.entries(mappingState).forEach(([fieldCanonical, columnName]) => {
-        const field = fieldsMeta.find(f => f.canonical_name === fieldCanonical);
+    Object.entries(appState.mappingState).forEach(([fieldCanonical, columnName]) => {
+        const field = appState.fieldsMeta.find(
+            f => f.canonical_name === fieldCanonical
+        );
 
         if (field && columnName) {
             mapping[columnName] = field.id;
@@ -483,23 +542,22 @@ function initDragAndDrop() {
 }
 
 function buildLoadBtnLogic() {
-
     const nextBtn = document.querySelector(".next-btn");
 
     nextBtn.addEventListener("click", async () => {
         try {
             showUploadingVisuals();
-            const payload = buildMappingPayload(window.fieldsMeta); // store this globally when loading fields
 
-            console.log("Sending mapping:", payload);
+            const payload = buildMappingPayload();
 
-            const response = await fetch(`/api/datasets/${appState.datasetId}/save-mapping`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
+            const response = await fetch(
+                `/api/datasets/${appState.datasetId}/save-mapping`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                }
+            );
 
             if (!response.ok) {
                 const err = await response.json();
@@ -507,21 +565,19 @@ function buildLoadBtnLogic() {
                 return;
             }
 
-            const result = await response.json();
             showUploadSuccess();
 
-            console.log("Mapping saved:", result);
         } catch (err) {
             showUploadError(err.message);
         }
     });
-};
+}
 
 
 let focusMode = "all"; // "all" | "unmapped"
 
 function getMappedColumns() {
-    return Object.values(mappingState);
+    return Object.values(appState.mappingState);
 }
 
 function applyColumnFocus() {
@@ -585,7 +641,7 @@ function allRequiredFieldsMapped() {
     requiredFields.forEach(field => {
         const key = field.dataset.canonicalName;
 
-        if (mappingState[key]) {
+        if (appState.mappingState[key]) {
             mappedCount++;
         }
     });
@@ -605,7 +661,7 @@ function updateMappingProgress() {
     requiredFields.forEach(field => {
         const key = field.dataset.canonicalName;
 
-        if (mappingState[key]) {
+        if (appState.mappingState[key]) {
             mappedCount++;
         }
     });
@@ -624,6 +680,14 @@ function showUploadingVisuals() {
     const loadingHtml = 'Uploading... <span class="animation-loader"></span>'
     uploadBtn.innerHTML = loadingHtml;
     uploadBtn.disabled = true;
+}
+
+function initUploadVisuals() {
+    if (allRequiredFieldsMapped()) {
+        showUploadSuccess();
+    } else {
+        resetUploadVisuals();
+    }
 }
 
 function resetUploadVisuals() {
@@ -649,6 +713,7 @@ function showUploadSuccess() {
     const uploadBtn = document.getElementById("uploadBtn");
     const uploadMsg = document.getElementById("uploadMsg");
 
+    uploadBtn.disabled = true;
     uploadBtn.innerHTML = `
         Uploaded
         <span class="checkmark">
@@ -671,6 +736,7 @@ function showUploadError(message) {
     const uploadBtn = document.getElementById("uploadBtn");
     const uploadMsg = document.getElementById("uploadMsg");
 
+    uploadBtn.disabled = true;
     uploadBtn.innerHTML = `
         Upload failed
         <span class="error-icon">

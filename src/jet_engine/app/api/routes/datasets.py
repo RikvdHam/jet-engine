@@ -17,7 +17,7 @@ from jet_engine.infra.db.models import DatasetMapping, SignatureMapping
 from jet_engine.app.services.dataset_query_service import get_raw_dataset_page, execute_query
 from jet_engine.app.services.dataset_validation_service import validate_dataset
 from jet_engine.app.services.dataset_transforming_service import transform_dataset
-from jet_engine.app.services.mapping_service import validate_map, save_map
+from jet_engine.app.services.mapping_service import validate_map, save_map, fetch_suggested_mapping
 from jet_engine.app.services.dataset_service import get_latest_dataset
 from jet_engine.domain.request_models import ViewRequest, MappingRequest
 from jet_engine.domain.models import View, Field, Dataset
@@ -50,6 +50,14 @@ async def get(
         offset=offset,
         limit=limit
     )
+
+
+@router.get("/{dataset_id}/suggested-mapping")
+async def get_suggested_mapping(
+    dataset_id: str,
+    db: Session = Depends(get_db)
+):
+    return await fetch_suggested_mapping(db, dataset_id)
 
 
 @router.post("/{dataset_id}/save-mapping")
