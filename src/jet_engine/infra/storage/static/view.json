@@ -10,53 +10,53 @@
         }
     ],
     "filters": {
-    "op": "and",
-    "conditions": [
+        "op": "and",
+        "conditions": [
+            {
+                "field_id": "12b5a5e0-d8d3-405c-aa66-75fb0a2928cb",
+                "operator": "in",
+                "value": ["journal_id_1", "journal_id_2"]
+            },
+            {
+                "op": "or",
+                "conditions": [
+                    {
+                        "field_id": "97acfd5e-1c61-481a-a97a-eefd5973789e",
+                        "operator": ">=",
+                        "value": 100000
+                    },
+                    {
+                        "field_id": "97acfd5e-1c61-481a-a97a-eefd5973789e",
+                        "operator": "<=",
+                        "value": -100000
+                    }
+                ]
+            }
+        ]
+    },
+    "measures": [
+        {
+            "field_id":"97acfd5e-1c61-481a-a97a-eefd5973789e",
+            "aggregations": ["sum", "avg"]
+        }
+        ,
+        {
+            "field_id": "2e1c827a-36c6-4873-b62f-d0634db18ede",
+            "aggregations": ["max", "min"]
+        }
+    ],
+    "sorting": [
         {
             "field_id": "12b5a5e0-d8d3-405c-aa66-75fb0a2928cb",
-            "operator": "in",
-            "value": ["journal_id_1", "journal_id_2"]
+            "sorting_direction": "desc"
         },
         {
-            "op": "or",
-            "conditions": [
-                {
-                    "field_id": "97acfd5e-1c61-481a-a97a-eefd5973789e",
-                    "operator": ">=",
-                    "value": 100000
-                },
-                {
-                    "field_id": "97acfd5e-1c61-481a-a97a-eefd5973789e",
-                    "operator": "<=",
-                    "value": -100000
-                }
-            ]
+            "field_id": "76a53a2b-b656-4c1f-a6e3-a930da63a308",
+            "sorting_direction": "asc"
         }
-    ]
-},
-    "measures": [
-    {
-        "field_id":"97acfd5e-1c61-481a-a97a-eefd5973789e",
-        "aggregations": ["sum", "avg"]
-    }
-    ,
-    {
-        "field_id": "2e1c827a-36c6-4873-b62f-d0634db18ede",
-        "aggregations": ["max", "min"]
-    }
-],
-    "sorting": [
-    {
-        "field_id": "12b5a5e0-d8d3-405c-aa66-75fb0a2928cb",
-        "sorting_direction": "desc"
-    },
-    {
-        "field_id": "76a53a2b-b656-4c1f-a6e3-a930da63a308",
-        "sorting_direction": "asc"
-    }
-],
+    ],
     "pagination": {
-    "limit": 50,
-    "offset": 0
-}
+        "limit": 50,
+        "offset": 0
+    }
 }

@@ -1,0 +1,178 @@
+.workspace-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+/* ============================= */
+/* TABS */
+/* ============================= */
+
+.workspace-header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    min-height: 0;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 8px;
+    padding: 0 8px;
+    flex-grow: 1
+}
+
+.meta-info {
+    flex-grow: 1;
+    max-width: 360px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.meta-info > span {
+    font-size: 14px;
+    line-height: 14px;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    text-align: start;
+}
+
+.tab {
+    padding: 8px 14px;
+    background: var(--bg-subtle);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.tab.active {
+    background: var(--primary);
+    color: white;
+}
+
+
+/* ============================= */
+/* DESCRIPTION BAR */
+/* ============================= */
+.description-bar {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ============================= */
+/* MAIN LAYOUT */
+/* ============================= */
+.workspace-body {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+.right-panel {
+    max-width: 360px;
+    flex-grow: 1;
+}
+
+.fields-container {
+    overflow: auto;
+    padding: 20px 20px 0 0;
+}
+
+.field-group {
+    margin-bottom: 18px;
+}
+
+.group-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+
+
+/* FIELD */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: white;
+    transition: all 0.2s ease;
+    cursor: grab;
+}
+
+.field:hover {
+    border-color: #c7d2fe;
+    background: #fafcff;
+}
+
+
+.field-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* FIELD META */
+.field-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* FIELD META */
+.field-meta-sm {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* FIELD NAME */
+.field-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.dtype-icon-box {
+    width: 32px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: var(--bg-subtle);
+
+    flex-shrink: 0;
+}
+
+/* SVG itself */
+.dtype-icon-box svg {
+    width: 18px;
+    height: 18px;
+
+    color: var(--primary);
+    fill: currentColor;
+}
+
+/* Text inside SVG */
+.dtype-icon-box text {
+    font-size: 10px;
+    font-weight: 600;
+    fill: currentColor;
+}

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/styles/workspace.css">
+{% endblock %}
+
+{% block title %}Upload Data{% endblock %}
+{% block pageTitle %}
+Step 4 — Workspace
+{% endblock %}
+{% block stepNumber %}4{% endblock %}
+
+{% block content %}
+<div class="workspace-container">
+
+    <!-- ============================= -->
+    <!-- TOP CONTEXT BAR -->
+<!--    &lt;!&ndash; ============================= &ndash;&gt;-->
+<!--    <div class="workspace-header card">-->
+<!--        <div class="context-left">-->
+<!--            <h3>ACME Corp</h3>-->
+<!--            <span>Fiscal Year: 2024</span>-->
+<!--        </div>-->
+
+<!--        <div class="context-right">-->
+<!--            <span><strong>0</strong> / 25,000 rows selected</span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+    <!-- ============================= -->
+    <!-- ANALYSIS TABS -->
+    <!-- ============================= -->
+    <div class="workspace-header">
+        <div class="tabs-container">
+            <div class="tab active">+ New Analysis</div>
+        </div>
+        <div class="meta-info">
+            <span style="color: var(--primary);">Company A</span>
+            <span style="color: var(--text-secondary);">2025</span>
+        </div>
+    </div>
+
+    <div class="workspace-body">
+        <div class="card left-panel"></div>
+        <div class="card right-panel">
+            <div class="mapping-header">
+                <h3>Fields</h3>
+            </div>
+            <div class="fields-container"></div>
+        </div>
+    </div>
+
+
+<!--    &lt;!&ndash; ============================= &ndash;&gt;-->
+<!--    &lt;!&ndash; SMART DESCRIPTION BAR &ndash;&gt;-->
+<!--    &lt;!&ndash; ============================= &ndash;&gt;-->
+<!--    <div class="description-bar card">-->
+<!--        Show the <strong>sum of Amount</strong>-->
+<!--        grouped by <strong>Account Number</strong>-->
+<!--        split by <strong>Month</strong>-->
+<!--        where <strong>Amount > 10,000</strong>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; ============================= &ndash;&gt;-->
+<!--    &lt;!&ndash; MAIN WORKSPACE &ndash;&gt;-->
+<!--    &lt;!&ndash; ============================= &ndash;&gt;-->
+<!--    <div class="workspace-body">-->
+
+<!--        &lt;!&ndash; LEFT PANEL &ndash;&gt;-->
+<!--        <div class="panel left-panel card">-->
+<!--            <h3>Fields</h3>-->
+
+<!--            <div class="field-group">-->
+<!--                <span class="group-title">Monetary</span>-->
+<!--                <div class="field">Amount</div>-->
+<!--                <div class="field">Debit Amount</div>-->
+<!--                <div class="field">Credit Amount</div>-->
+<!--            </div>-->
+
+<!--            <div class="field-group">-->
+<!--                <span class="group-title">Account</span>-->
+<!--                <div class="field">Account Number</div>-->
+<!--                <div class="field">Account Name</div>-->
+<!--            </div>-->
+
+<!--            <div class="field-group">-->
+<!--                <span class="group-title">Date</span>-->
+<!--                <div class="field">Posting Date</div>-->
+<!--                <div class="field">Entry Date</div>-->
+<!--            </div>-->
+
+<!--            <hr>-->
+
+<!--            <h3>Tests</h3>-->
+<!--            <button class="test-btn">Above Materiality</button>-->
+<!--            <button class="test-btn">Weekend Postings</button>-->
+<!--            <button class="test-btn">Admin Users</button>-->
+<!--        </div>-->
+
+
+<!--        &lt;!&ndash; CENTER PANEL &ndash;&gt;-->
+<!--        <div class="panel center-panel card">-->
+
+<!--            &lt;!&ndash; Pivot Builder &ndash;&gt;-->
+<!--            <div class="pivot-builder">-->
+
+<!--                <div class="pivot-zone">-->
+<!--                    <span>Rows</span>-->
+<!--                    <div class="drop-zone"></div>-->
+<!--                </div>-->
+
+<!--                <div class="pivot-zone">-->
+<!--                    <span>Columns</span>-->
+<!--                    <div class="drop-zone"></div>-->
+<!--                </div>-->
+
+<!--                <div class="pivot-zone">-->
+<!--                    <span>Values</span>-->
+<!--                    <div class="drop-zone"></div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Table &ndash;&gt;-->
+<!--            <div class="table-wrapper">-->
+<!--                <table class="app-table">-->
+<!--                    <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Account</th>-->
+<!--                            <th>Jan</th>-->
+<!--                            <th>Feb</th>-->
+<!--                            <th>Total</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                        <tr>-->
+<!--                            <td>4000</td>-->
+<!--                            <td>10,000</td>-->
+<!--                            <td>15,000</td>-->
+<!--                            <td>25,000</td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+
+<!--        &lt;!&ndash; RIGHT PANEL &ndash;&gt;-->
+<!--        <div class="panel right-panel card">-->
+<!--            <h3>Filters</h3>-->
+
+<!--            <div class="filter">-->
+<!--                <label>Amount</label>-->
+<!--                <input type="number" placeholder="> 10000">-->
+<!--            </div>-->
+
+<!--            <div class="filter">-->
+<!--                <label>Posting Date</label>-->
+<!--                <input type="date">-->
+<!--            </div>-->
+
+<!--            <div class="filter">-->
+<!--                <label>Journal Type</label>-->
+<!--                <select>-->
+<!--                    <option>Manual</option>-->
+<!--                    <option>System</option>-->
+<!--                </select>-->
+<!--            </div>-->
+
+<!--            <hr>-->
+
+<!--            <h3>Aggregation</h3>-->
+<!--            <select>-->
+<!--                <option>Sum</option>-->
+<!--                <option>Average</option>-->
+<!--                <option>Count</option>-->
+<!--                <option>Distinct Count</option>-->
+<!--            </select>-->
+
+<!--            <hr>-->
+
+<!--            <button class="primary full-width">Apply</button>-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/scripts/app/workspace.js"></script>
+{% endblock %}

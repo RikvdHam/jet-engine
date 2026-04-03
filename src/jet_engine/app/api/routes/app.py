@@ -45,3 +45,14 @@ async def validate(request: Request):
             "active_page": "validate"
          }
     )
+
+
+@router.get("/workspace", response_class=HTMLResponse)
+async def workspace(request: Request):
+    return templates.TemplateResponse(
+        "workspace.html",
+        {
+            "request": request,
+            "active_page": "workspace"
+         }
+    )

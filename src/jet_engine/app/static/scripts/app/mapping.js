@@ -617,20 +617,6 @@ function applyColumnFocus() {
     });
 };
 
-const focusBtn = document.querySelector(".focus-btn");
-
-focusBtn.addEventListener("click", () => {
-    if (focusMode === "all") {
-        focusMode = "unmapped";
-        focusBtn.textContent = "Focus: Unmapped";
-    } else {
-        focusMode = "all";
-        focusBtn.textContent = "Focus: All";
-    }
-
-    applyColumnFocus();
-});
-
 function allRequiredFieldsMapped() {
     const requiredFields = document.querySelectorAll(
         ".mapping-field[data-required='true']"
